@@ -1,0 +1,247 @@
+---
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1);
+---
+
+<nav class='justify-self-end z-50'>
+    <div class='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
+        <div class='flex h-16 items-center justify-between'>
+            <div class='inset-y-0 left-0 flex items-center lg:hidden'>
+                <!-- Mobile menu button-->
+                <button
+                    type='button'
+                    class='inline-flex items-center justify-center rounded-sm p-2 text-gray-600 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white'
+                    aria-controls='mobile-menu'
+                    aria-expanded='false'
+                    id='navButton'
+                >
+                    <span class='sr-only'>Åpne hovedmeny</span>
+                    <!--
+            Icon when menu is closed.
+
+            Heroicon name: outline/bars-3           
+          -->
+                    <svg
+                        class='block h-6 w-6'
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke-width='1.5'
+                        stroke='currentColor'
+                        aria-hidden='true'
+                        id='openMenuIcon'
+                    >
+                        <path
+                            stroke-linecap='round'
+                            stroke-linejoin='round'
+                            d='M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5'></path>
+                    </svg>
+                    <!--
+            Icon when menu is open.
+
+            Heroicon name: outline/x-mark
+          -->
+                    <svg
+                        class='hidden h-6 w-6'
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke-width='1.5'
+                        stroke='currentColor'
+                        aria-hidden='true'
+                        id='closedMenuIcon'
+                    >
+                        <path
+                            stroke-linecap='round'
+                            stroke-linejoin='round'
+                            d='M6 18L18 6M6 6l12 12'></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div
+                class='hidden lg:flex flex-1 items-center justify-center lg:items-stretch lg:justify-start'
+            >
+                <div class='hidden lg:ml-6 lg:block'>
+                    <div class='flex space-x-4'>
+                        {
+                            currentPath === '' ? (
+                                <a
+                                    href='/'
+                                    class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                                    aria-current='page'
+                                >
+                                    Hjem
+                                </a>
+                            ) : (
+                                <a
+                                    href='/'
+                                    class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                                >
+                                    Hjem
+                                </a>
+                            )
+                        }
+
+                        {
+                            currentPath === 'om-bryggepraten' ? (
+                                <a
+                                    href='/om-bryggepraten'
+                                    class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                                    aria-current='page'
+                                >
+                                    Om Bryggepraten
+                                </a>
+                            ) : (
+                                <a
+                                    href='/om-bryggepraten'
+                                    class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                                >
+                                    Om Bryggepraten
+                                </a>
+                            )
+                        }
+                        {
+                            currentPath === 'kontakt-oss' ? (
+                                <a
+                                    href='/kontakt-oss'
+                                    class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                                    aria-current='page'
+                                >
+                                    Kontakt Oss
+                                </a>
+                            ) : (
+                                <a
+                                    href='/kontakt-oss'
+                                    class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                                >
+                                    Kontakt Oss
+                                </a>
+                            )
+                        }
+                        {
+                            currentPath === 'ruth-sjebane' ? (
+                                <a
+                                    href='/ruth-sjebane'
+                                    class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                                    aria-current='page'
+                                >
+                                    Ruth Sjebane
+                                </a>
+                            ) : (
+                                <a
+                                    href='/ruth-sjebane'
+                                    class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                                >
+                                    Ruth Sjebane
+                                </a>
+                            )
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile menu, show/hide based on menu state. -->
+
+    <div class='hidden relative h-min lg:hidden' id='mobileMenu'>
+        <div
+            class='absolute right-[-0.5vw] w-[95vw] md:w-[50vw] h-min flex flex-col gap-2 rounded-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none-1 px-2 pt-2 pb-3 border-blue-800'
+        >
+            {
+                currentPath === '' ? (
+                    <a
+                        href='/'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                        aria-current='page'
+                    >
+                        Hjem
+                    </a>
+                ) : (
+                    <a
+                        href='/'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                    >
+                        Hjem
+                    </a>
+                )
+            }
+
+            {
+                currentPath === 'om-bryggepraten' ? (
+                    <a
+                        href='/om-bryggepraten'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                        aria-current='page'
+                    >
+                        Om Bryggepraten
+                    </a>
+                ) : (
+                    <a
+                        href='/om-bryggepraten'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                    >
+                        Om Bryggepraten
+                    </a>
+                )
+            }
+            {
+                currentPath === 'kontakt-oss' ? (
+                    <a
+                        href='/kontakt-oss'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                        aria-current='page'
+                    >
+                        Kontakt Oss
+                    </a>
+                ) : (
+                    <a
+                        href='/kontakt-oss'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                    >
+                        Kontakt Oss
+                    </a>
+                )
+            }
+            {
+                currentPath === 'ruth-sjebane' ? (
+                    <a
+                        href='/ruth-sjebane'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                        aria-current='page'
+                    >
+                        Ruth Sjebane
+                    </a>
+                ) : (
+                    <a
+                        href='/ruth-sjebane'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                    >
+                        Ruth Sjebane
+                    </a>
+                )
+            }
+        </div>
+    </div>
+</nav>
+
+<script is:inline>
+    const openMenuIcon = document.getElementById('openMenuIcon');
+    const closedMenuIcon = document.getElementById('closedMenuIcon');
+    const menuItems = document.getElementById('mobileMenu');
+
+    const handleNav = () => {
+        openMenuIcon.classList.contains('block')
+            ? openMenuIcon.classList.replace('block', 'hidden')
+            : openMenuIcon.classList.replace('hidden', 'block');
+        closedMenuIcon.classList.contains('block')
+            ? closedMenuIcon.classList.replace('block', 'hidden')
+            : closedMenuIcon.classList.replace('hidden', 'block');
+        menuItems.classList.contains('hidden')
+            ? menuItems.classList.replace('hidden', 'block')
+            : menuItems.classList.replace('block', 'hidden');
+    };
+
+    document.getElementById('navButton').addEventListener('click', handleNav);
+</script>

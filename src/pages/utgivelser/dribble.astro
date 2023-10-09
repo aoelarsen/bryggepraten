@@ -1,0 +1,59 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+
+import dribbleOmslag from '../../images/bokomslag/dribbleOmslag.png';
+---
+
+<Layout title='Dribble'>
+    <main class='p-4 mx-auto max-w-2xl grid gap-8 mb-8'>
+        <h2 class='text-xl md:text-3xl'>Dribble</h2>
+        <figure class='grid'>
+            <Image
+                loading='lazy'
+                src={dribbleOmslag}
+                alt='bokomslaget til Dribble av Åshild Thune'
+                class='place-self-center'
+            />
+            <figcaption class='italic place-self-center'>
+                Bli kjent med Anton Karlsen og bygda hans, DRIBBLE.
+            </figcaption>
+        </figure>
+
+        <p>
+            Forfatter Åshild Thune er bosatt i Porsgrunn, men er opprinnelig fra Sørreisa. Hun er
+            utdannet sosionom. Tidligere utgivelse ”Skulpturen” (2011).
+        </p>
+
+        <article
+            class='p-2 my-8 border border-slate-100 bg-white rounded-sm drop-shadow-lg leading-loose'
+        >
+            <h3 class='font-bold'>Utdrag fra Dribble</h3>
+            <p>
+                Anton Karlsen åpner døra på sin nye, havblå Kia. Lyden er som et kvinesukk. Han
+                stryker rundt rattet og setter seg i bilen. Setet, lyst grått og tilpassa en
+                normalkropp som den Anton Karlsen har, tar behagelig imot ham. Heldigvis automatgir,
+                tenker han og minnes den gamle Citroengen med slarket girspak.
+            </p>
+            <p>
+                Anton Karlsen har skaffa seg bygdas første el-bil. Han skal kjøre sakte og
+                omstendelig rundt på alle sine oppdrag. Jomfrutur er det han skal på. Han skal gi
+                folk anledning til å se, spørre, glise og si at han snart blir stående mellom
+                Finnvolljordet og Minushaugen med dau bil, han som er så fin på det at han ikke vil
+                kjøre diesel.
+            </p>
+            <p>
+                Men Anton Karlsen er ikke fin på det. Han har lest seg opp på verdens bedrøvelige
+                gang og vet at framskrittet ligger i el. Bygda hans rager ikke høyt på
+                forurensingskalaen etter at tremassefabrikken ble lagt ned. Sjøl har han ikke bevega
+                seg lenger sør i verden enn til en campingplass på Løkken i Danmark.
+            </p>
+            <p>
+                Men Anton ser seg som globalist. Alt henger sammen med alt, vil han si til de som
+                bryr seg. Denne bilfilla er bare et ørlite bidrag til en bedre verden. De fleste vil
+                glise skjevt og snakke drit bak ryggen hans. Men hva gjør det? Anton Karlsen har
+                høyere mål i livet enn å stirre på skotuppene og sjekke prostataen.
+            </p>
+        </article>
+    </main>
+</Layout>

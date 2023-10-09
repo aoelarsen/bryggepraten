@@ -1,0 +1,89 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { Image } from 'astro:assets';
+
+import kontaktSketch from '../images/kontakt-oss-sketch.png';
+import hansen from '../images/H.png';
+import larsen from '../images/L.png';
+---
+
+<Layout title='Kontakt Oss'>
+    <main class='p-4 mx-auto max-w-2xl grid gap-12'>
+        <section class='grid self-start'>
+            <h2 class='md:text-3xl'>Kontakt oss</h2>
+            <figure>
+                <Image
+                    loading='lazy'
+                    src={kontaktSketch}
+                    alt='en tegning av forfatterne bak Bryggepraten, Birger Dyve larsen og Jørund Holst-Hansen'
+                    width='1024'
+                    height='520'
+                />
+                <figcaption class='italic'>
+                    Forfattere er Jørund Holst-Hansen og Birger Dyve Larsen. De skriver alle tekster
+                    sammen og begge to tegner.
+                </figcaption>
+            </figure>
+        </section>
+
+        <section class='grid grid-cols-[60%,auto] md:grid-cols-2 py-8'>
+            <div class='self-center'>
+                <h3 class='text-lg font-bold snap-y snap-mandatory'>Jørund Holst-Hansen</h3>
+                <p>
+                    Har en helt egen nettside med mer skriblerier og han kan også kontaktes pr
+                    epost!
+                </p>
+                <ul class='md:list-disc list-inside'>
+                    <li>
+                        <a
+                            href='http://www.jhhnett.com/'
+                            class='underline text-indigo-800 hover:text-indigo-600'>jhhnett.com</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href='email:holst.hansen1952@gmail.com'
+                            class='underline text-indigo-800 hover:text-indigo-600'
+                            >holst.hansen1952@gmail.com</a
+                        >
+                    </li>
+                </ul>
+            </div>
+            <figure class='bg-clip-text md:block'>
+                <Image loading='lazy' src={hansen} alt='Tegnig av Hansen' height='550' />
+            </figure>
+        </section>
+
+        <section class='grid grid-cols-[40%,auto] md:grid-cols-2 py-8'>
+            <figure class='bg-clip-text md:block'>
+                <Image loading='lazy' src={larsen} alt='Tegnig av Larsen' height='550' />
+            </figure>
+            <div class='self-center'>
+                <h3 class='text-lg font-bold snap-y snap-mandatory'>Birger Dyve Larsen</h3>
+                <p>Har også mer skriblerier og sånn og kan kontaktes pr epost!</p>
+                <ul class='md:list-disc list-inside'>
+                    <li>
+                        <a
+                            href='https://baglerlarsen.net'
+                            class='underline text-indigo-800 hover:text-indigo-600'
+                            >Baglerlarsen.net</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href='email:birgerdl@yahoo.no'
+                            class='underline text-indigo-800 hover:text-indigo-600'
+                            >birgerdl@yahoo.no</a
+                        >
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class='grid py-8'>
+            <h3 class='font-bold text-lg md:text-2xl snap-y snap-mandatory'>Kontaktskjema</h3>
+            <ContactForm />
+        </section>
+    </main>
+</Layout>

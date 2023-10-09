@@ -1,0 +1,54 @@
+---
+---
+
+<form
+    class='grid gap-2 px-3 py-4 md:px-4'
+    data-netlify='true'
+    netlify-honeypot='bot-field'
+    method='POST'
+    id='kontaktskjema'
+>
+    <p class='hidden'>
+        <label>
+            Ikke fyll inn dette feltet hvis du er et menneske: | Don't fill this out if you're
+            human: <input name='bot-field' />
+        </label>
+    </p>
+    <fieldset class='py-2 flex flex-wrap gap-2'>
+        <label class='flex flex-col w-full'>
+            Navn
+            <input
+                required
+                name='navn'
+                type='text'
+                placeholder='Navn'
+                class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+            />
+        </label>
+        <label class='flex flex-col w-full'>
+            E-post
+            <input
+                name='epost'
+                required
+                type='email'
+                placeholder='epost@adresse.no'
+                class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+            />
+        </label>
+    </fieldset>
+    <label class='flex flex-col'>
+        Melding
+        <textarea
+            name='melding'
+            required
+            class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+            placeholder='Ja, du snakkær om..?'
+            rows='10'></textarea>
+    </label>
+    <input
+        name='submit'
+        type='submit'
+        value='Send melding'
+        class='py-2 rounded-sm bg-[#efb261] text-black text-secondary cursor-pointer hover:text-amber-100 hover:bg-yellow-900 md:w-1/2 md:justify-self-end'
+    />
+</form>

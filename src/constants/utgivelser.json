@@ -1,0 +1,65 @@
+{
+  "utgivelser": {  
+    "bryggepraten": [
+      {
+        "tittel": "Bryggepraten Boka",
+        "sjanger": "",
+        "forfattere": ["Birger Dyve Larsen", "Jørund Holst-Hansen"],
+        "utgivelsesdato": "",
+        "pris": "200",
+        "status": "få eksemplarer igjen"        
+      },
+      {
+        "tittel": "Denne Fuglen Har Fløyet",
+        "sjanger": "",
+        "forfattere": ["Birger Dyve Larsen", "Jørund Holst-Hansen"],
+        "utgivelsesdato": "",
+        "pris": "250",
+        "status": ""
+      },
+      {
+        "tittel": "Bryggepratens Håndbok - Veiene Inn",
+        "sjanger": "",
+        "forfattere": ["Birger Dyve Larsen", "Jørund Holst-Hansen"],
+        "utgivelsesdato": "",
+        "pris": "250",
+        "status": ""
+      },
+      {
+        "tittel": "Underveis kan du late som du flyr",
+        "sjanger": "",
+        "forfattere": ["Birger Dyve Larsen", "Jørund Holst-Hansen"],
+        "utgivelsesdato": "",
+        "pris": "299",
+        "status": ""
+      }
+    ],
+    "kalendere": [
+      {
+        "tittel": "Kunstkalender",
+        "tilvirkere": ["Birger Dyve Larsen", "Jørund Holst-Hansen"],
+        "utgivelsesdato": "",
+        "pris": "200",
+        "status":"UTSOLGT"
+      }
+    ],
+    "andre_forfattere": [
+      {
+        "tittel": "Liv Og Leven På Karia",
+        "sjanger": "",
+        "forfattere": ["Øyvind Børresen"],
+        "utgivelsesdato": "",
+        "pris": "200",
+        "status": ""
+      },
+      {
+        "tittel": "Dribble",
+        "sjanger": "",
+        "forfattere": ["Åshild Thunes"],
+        "utgivelsesdato": "",
+        "pris": "",
+        "status": ""
+      }
+    ]
+}
+}

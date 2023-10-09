@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+
+import underveisOmslag from '../../images/bokomslag/underveiskandulatesomduflyr.jpg';
+---
+
+<Layout title='Underveis kan du late som du flyr'>
+    <main class='p-4 mx-auto max-w-2xl grid gap-8 mb-8'>
+        <h2 class='text-xl md:text-3xl'>Underveis kan du late som du flyr</h2>
+        <figure class='grid'>
+            <Image
+                loading='lazy'
+                src={underveisOmslag}
+                alt='bokomslaget til Underveis kan du late som du flyr'
+                class='place-self-center'
+            />
+        </figure>
+
+        <p>
+            Litteraturviteren RUTH SJEBANE har møysommelig arbeidet seg gjennom materialet, og har
+            på den måten tegnet et levende bilde av Davidsen.
+        </p>
+        <aside
+            class='p-2 my-8 border border-slate-100 bg-white rounded-sm drop-shadow-lg leading-loose'
+        >
+            <span class='font-bold'>Forfatteren skriver:</span>
+            <blockquote>
+                «LEONARD O. DAVIDSEN var en meget stor og betydningsfull mann i Sandefjord på
+                1800-tallet, men tydeligvis undervurdert i sin samtid, og siden glemt. Han skal ha
+                vært det man nærmest kan kalle et renessansemenneske, med evner og kompetanse på en
+                rekke områder. Når han ikke er bedre kjent, skyldes det i hovedsak to forhold: Han
+                var nok egentlig en beskjeden fyr. Dessuten viser det seg at hans ideer og forslag
+                ble aktivt motarbeidet av ressurssterke og, vi må vel kunne si udemokratiske,
+                krefter i byen.»
+            </blockquote>
+        </aside>
+        <p>
+            Bryggekanten Forlag mener også at dette er en kommentar til dagens
+            konspirasjons-teorier.
+        </p><p>
+            Samtidig som forlaget nå utgir Sjebanes manuskript, viser det seg at forfatteren selv
+            har forsvunnet. Boken inneholder derfor også en beretning om forlagets dramatiske forsøk
+            på å komme i kontakt med henne.
+        </p>
+    </main>
+</Layout>

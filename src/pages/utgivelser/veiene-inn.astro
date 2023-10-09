@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+
+import veieneOmslag from '../../images/bokomslag/veieneInnOmslag.png';
+---
+
+<Layout title='Veiene Inn'>
+    <main class='p-4 mx-auto max-w-2xl grid gap-8 mb-8'>
+        <h2 class='text-xl md:text-3xl'>Veiene Inn</h2>
+        <figure class='grid'>
+            <Image
+                loading='lazy'
+                src={veieneOmslag}
+                alt='bokomslaget til Veiene Inn'
+                class='place-self-center'
+            />
+            <figcaption class='italic'>
+                Åssen er <em>sandefjordingær</em> og åssenbli en av dem? For sandefjordingær,
+                innfløtterær og andre.
+            </figcaption>
+        </figure>
+        <p class='font-semibold'></p>
+
+        <p>
+            En håndbok &hyphen; Denne boka vil være til stor hjelp for alle som vil komme i
+            nærkontakt med mennesker fra Sandefjord. Boka vil også være et meget utmerket
+            utgangspunkt for sandefjordinger til å forstå innflyttere. Og ikke minst vil den også
+            være til stor hjelp for at sandefjordingen kan forstå seg selv.
+        </p>
+    </main>
+</Layout>

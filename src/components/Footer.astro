@@ -1,0 +1,42 @@
+---
+// import paBrygga from '../images/paa_brygga_v1.png';
+import bryggebenken from '../images/bryggebenken.png';
+import { Image } from 'astro:assets';
+
+import ThisYear from './FooterYear.jsx';
+---
+
+<footer
+    class='p-4 mt-52 md:mt-40 grid md:grid-cols-3 place-content-center text-center bg-[#efb261] text-black relative border-t-4 border-black'
+>
+    <figure class='absolute right-0 bottom-full md:bottom-[13.5rem] overflow-hidden'>
+        <Image src={bryggebenken} alt='gutta på brygga' loading='lazy' />
+    </figure>
+    <nav class='my-8 text-left col-span-2 justify-self-center'>
+        <h4 class='font-semibold'>Lettlikte lenker</h4>
+        <ul class='leading-loose'>
+            <li>
+                <a href='/bryggebutikken' class='underline hover:text-yellow-900'>Kjøp bøkene her</a
+                >
+            </li>
+            <li>
+                <a href='/ruth-sjebane' class='underline hover:text-yellow-900'
+                    >Ruth Sjebanes Artikler og Foredrag</a
+                >
+            </li>
+            <li>
+                <a href='/praten-i-pressa' class='underline hover:text-yellow-900'
+                    >Praten i Pressa</a
+                >
+            </li>
+        </ul>
+    </nav>
+    <div class='py-2 col-span-3 w-full justify-self-center z-10 text-sm'>
+        <p><ThisYear client:load /> &copy; Bryggekanten Forlag</p>
+        <p>
+            Nettsiden er laget av <a href='https://aolar.no' class='underline hover:text-yellow-900'
+                >Aolar.no</a
+            >
+        </p>
+    </div>
+</footer>

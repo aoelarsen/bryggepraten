@@ -1,0 +1,135 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+
+import sbKunsts1 from '../images/presse/sb-1-11-2020-s-1.jpg';
+import sbKunsts2 from '../images/presse/sb-1-11-2020-s-2.jpg';
+import veienePresse from '../images/presse/veiene-Inn-SB.png';
+import fuglenSpania from '../images/presse/Fuglen-i-Spania.jpg';
+import fuglenSB from '../images/presse/Fuglen-i-SB.jpg';
+import bryggepratSB from '../images/presse/SB-12-04-2018.jpg';
+---
+
+<Layout title='Praten i pressa'>
+    <main class='p-4 mx-auto max-w-2xl grid gap-12'>
+        <h2 id='top' class="class='md:text-3xl'">Praten i pressa</h2>
+        <p>En samling av omtaler og presseartikler om Bryggepraten</p>
+
+        <section
+            class='my-4 p-2 justify-self-center border-slate-100 bg-white rounded-sm drop-shadow-lg grid gap-4'
+        >
+            <h3 class='text-lg font-bold'>Omtale i Sandefjords Blad</h3>
+            <div class='grid leading-snug italic'>
+                <span>1.11.2020</span>
+            </div>
+            <figure class='grid place-content-center gap-4'>
+                <Image
+                    loading='lazy'
+                    src={sbKunsts1}
+                    alt='Avisutklipp med omtale av Kunstkalenderen'
+                />
+                <Image
+                    loading='lazy'
+                    src={sbKunsts2}
+                    alt='Avisutklipp med omtale av Kunstkalenderen'
+                />
+            </figure>
+        </section>
+
+        <a href='#top' class='underline text-indigo-800 hover:text-indigo-600 place-self-center'
+            >&uarr; Tilbake til toppen &uarr;</a
+        >
+
+        <section
+            class='my-4 p-2 justify-self-center border-slate-100 bg-white rounded-sm drop-shadow-lg grid gap-4'
+        >
+            <h3 class='text-lg font-bold'>Nyhet om ny bok i Sandefjords Blad</h3>
+            <div class='grid leading-snug italic'>
+                <span>15.05.2020</span>
+            </div>
+            <figure>
+                <Image
+                    loading='lazy'
+                    src={veienePresse}
+                    alt='Avisutklipp med omtale av boka Veiene Inn'
+                />
+            </figure>
+        </section>
+        <a href='#top' class='underline text-indigo-800 hover:text-indigo-600 place-self-center'
+            >&uarr; Tilbake til toppen &uarr;</a
+        >
+
+        <section
+            class='my-4 p-2 justify-self-center border-slate-100 bg-white rounded-sm drop-shadow-lg grid gap-4'
+        >
+            <h3 class='text-lg font-bold'>Omtale i Spania</h3>
+            <div class='grid leading-snug italic'>
+                <span>02.05.2019</span>
+            </div>
+            <figure class='grid place-content-center'>
+                <Image
+                    loading='lazy'
+                    src={fuglenSpania}
+                    alt='Forfatterne av Denne Fuglen Er Fløyet viser fram boken et sted i en hvit landsby i Spania'
+                />
+            </figure>
+            <p lang='es-ES'>
+                Hansen y Larsen, los protagonistas de la novela de misterios e intrigas: 'Denne
+                fuglen har floyet' ('Este pájaro ha volado') están de enhorabuena: Además de
+                disfrutar en <a
+                    class='underline text-indigo-800 hover:text-indigo-600'
+                    href='https://www.axarca.es/en/frigiliana-one-of-the-most-beautiful-towns-in-spain/'
+                    >Frigiliana</a
+                > de su cerveza favorita, <a
+                    class='underline text-indigo-800 hover:text-indigo-600'
+                    href='https://www.axarca.es'>LaAxarca</a
+                > &hyphen;Tropical Pale Ale&hyphen; celebran su exitosa crítica literaria
+            </p>
+            <!-- <p lang='es-ES'>
+                Puedes leerla en este enlace Bryggepraten på Bryggekanten
+                https://www.bryggepraten.no/
+            </p> -->
+        </section>
+        <a href='#top' class='underline text-indigo-800 hover:text-indigo-600 place-self-center'
+            >&uarr; Tilbake til toppen &uarr;</a
+        >
+
+        <section
+            class='my-4 p-2 justify-self-center border-slate-100 bg-white rounded-sm drop-shadow-lg grid gap-4'
+        >
+            <h3 class='text-lg font-bold'>Påskekrim i Sanfejords Blad</h3>
+            <div class='grid leading-snug italic'>
+                <span>22.03.2019</span>
+            </div>
+            <figure class='grid place-content-center'>
+                <Image
+                    loading='lazy'
+                    src={fuglenSB}
+                    alt='Avisutklipp med omtale av boka Denne Fuglen Har Fløyet'
+                />
+            </figure>
+        </section>
+        <a href='#top' class='underline text-indigo-800 hover:text-indigo-600 place-self-center'
+            >&uarr; Tilbake til toppen &uarr;</a
+        >
+
+        <section
+            class='my-4 p-2 justify-self-center border-slate-100 bg-white rounded-sm drop-shadow-lg grid gap-4'
+        >
+            <h3 class='text-lg font-bold'>Omtale i Sandefjords Blad</h3>
+            <div class='grid leading-snug italic'>
+                <span>12.04.2018</span>
+            </div>
+            <figure class='grid place-content-center'>
+                <Image
+                    loading='lazy'
+                    src={bryggepratSB}
+                    alt='Avisutklipp med omtale av boka Bryggepraten'
+                />
+            </figure>
+        </section>
+        <a href='#top' class='underline text-indigo-800 hover:text-indigo-600 place-self-center'
+            >&uarr; Tilbake til toppen &uarr;</a
+        >
+    </main>
+</Layout>

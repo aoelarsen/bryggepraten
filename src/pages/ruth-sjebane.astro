@@ -1,0 +1,330 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+
+import kalenderinnhold from '../images/kalenderinnhold.jpg';
+import RS from '../images/RS.jpg';
+---
+
+<Layout title='Ruth Sjebanes artikler og foredrag'>
+    <main class='p-4 mx-auto max-w-2xl grid gap-8 mb-8'>
+        <h2 id='top' class='text-xl md:text-3xl'>Ruth Sjebanes artikler og foredrag</h2>
+        <div class='flex flex-col md:grid md:grid-cols-[auto,1fr] gap-4'>
+            <figure class='place-self-center'>
+                <Image
+                    loading='lazy'
+                    src={RS}
+                    alt='Et bilde av en dame som skjuler ansiktet bak et stort kamera'
+                />
+            </figure>
+            <p>
+                Vi har fått tillatelse til å legge ut noen av Litt.vit Ruth Sjebanes artikler,
+                foredrag og kommentarer. Hun har også bidratt til to av våre bøker. Vi takker for
+                hennes bidrag ved å la henne få en egen side her på Bryygepratens nettside.
+            </p>
+        </div>
+
+        <nav class='py-4 px-8 my-8 bg-slate-100 rounded-sm shadow-inner'>
+            <h3 class='font-semibold'>Innholdsfortegnelse</h3>
+            <ul class='grid gap-3 list-decimal'>
+                <li>
+                    <a href='#artikkel1' class='underline text-indigo-800 hover:text-indigo-600'>
+                        DIALEKTRADBREKKING</a
+                    >
+                    <br /> en ny litterær sjanger? (august 2020)
+                </li>
+
+                <li>
+                    <a href='#artikkel2' class='underline text-indigo-800 hover:text-indigo-600'
+                        >BRYGGEPREATEN, et litterært kultfenomen</a
+                    >
+                    <br /> Ruth Sjebanes forelesing i fem deler på internet (oktober 2020)
+                </li>
+
+                <li>
+                    <a href='#artikkel3' class='underline text-indigo-800 hover:text-indigo-600'
+                        >ODE TIL NAVLEBESKUELSEN(?)</a
+                    >
+                    <br /> en anmeldeldelse
+                </li>
+            </ul>
+        </nav>
+
+        <article
+            class='my-4 p-2 justify-self-center border-slate-100 bg-white rounded-sm drop-shadow-lg grid gap-4'
+        >
+            <h3 class='text-center font-semibold py-3 uppercase' id='artikkel1' class='font-bold'>
+                DIALEKTRADBREKKING &hyphen; EN NY SKJØNNLITTERÆR SJANGER?
+            </h3>
+            <div class='grid leading-snug italic'>
+                <span>August 2020</span>
+            </div>
+
+            <p>
+                Det er vanskelig å være enige om språk. Det er alle enige om. Når det gjelder
+                skriftspråk har vi jo flere slike her i landet, noe som i seg selv viser at man ikke
+                er blitt enige om ett felles skriftspråk. Og når det for eksempel gjelder bokmålet,
+                så skrives det jo både konservativt og radikalt bokmål, og dersom vi studerer
+                ordlistene, både i bokmål, nynorsk og riksmål, så finer vi jo at det finnes valgfrie
+                former en rekke steder. Likevel mener vel de fleste at det er viktig å skrive
+                riktig.
+            </p>
+
+            <p>
+                Det blir ikke særlig lettere når det handler om det muntlige språket. Vi har en
+                mengde dialekter som et stykke på vei kan gi oss en pekepinn om hvor i landet en
+                språkbruker kommer fra. Men selv innenfor de enkelte dialekter kan
+                sosiolingvistikken si noe om hvordan faktorer som klasse og kjønn, eller geografi
+                innenfor et mindre område, kan virke inn på det språklige uttrykket. Her finnes det
+                jo heller ikke noen offisielle normer å holde seg til. Og dermed er vi fort over i
+                den språklige disiplin som vi kan kalle radbrekking: Vi vil gjerne at alle skal
+                snakke som oss selv. Alt annet er fremmed og rart, og de som snakker annerledes kan
+                lett bli beskyldt for å «begå radbrekking» av dialekten/språket.
+            </p>
+
+            <p>
+                Ekstra vanskelig blir det når noen forsøker å nedtegne dialektene i skrift. Man vil
+                være bundet av grunntrekk i det vanlige og autoriserte skriftbildet, og så forsøker
+                man å gjengi lyder slik de blir uttalt. I tillegg til at man tillater seg å bruke
+                ord og uttrykk som har en kanskje svært begrenset utbredelse. Da er det særlig lett
+                å få reaksjoner som at «Vi snakker ikke slik!» eller «Dette forstår jeg ikke!»
+                Kontrasten til skriftspråket blir desto større, og dermed kommer beskyldningene om
+                radbrekking.
+            </p>
+
+            <p>
+                Ivar Aasen ble beskyldt for radbrekking av det autoriserte bogsproget da han utga
+                «Prøver på Landsmålet». I populærkulturen finnes det mange eksempler på at
+                forfattere skriver på dialekt, gjerne som et litterært grep, både for å skape en
+                lokal tilknytning, men kanskje dessuten for å provosere fram en bevisstgjøring om
+                eget språk? Jeg nevner i fleng Alf Prøysen, Åge Aleksandersen og mange flere. Det
+                var neppe slik at alle likte å lese slikt til å begynne med. Man skulle da skrive
+                «dannet»? Sikkert mange som også hadde sterke synspunkter på hva som var «korrekt».
+                Det sterkt nedlatende uttrykket «Dialektradbrekking» må dermed sees mer som en
+                beskyldning fra folk som mener at de vet bedre, enn som en egen kulturnedbrytende
+                sjanger. Den «kunstneriske frihet» skal visstnok fortsatt være relevant innenfor
+                skjønnlitteraturen.
+            </p>
+        </article>
+
+        <a href='#top' class='underline text-indigo-800 hover:text-indigo-600 place-self-center'
+            >&uarr; Tilbake til toppen &uarr;</a
+        >
+
+        <article
+            class='my-4 p-2 justify-self-center border-slate-100 bg-white rounded-sm drop-shadow-lg grid gap-4'
+        >
+            <h3 class='text-center font-semibold py-3 uppercase' id='artikkel2'>
+                Ruth Sjebanes forelesing i fem deler på internet
+            </h3>
+            <div class='grid leading-snug italic'>
+                <span>18.oktober 2020</span>
+            </div>
+
+            <section>
+                <h4 class='font-bold'>«BRYGGEPREATEN, ET LITTERÆRT KULTFENOMEN» del 1</h4>
+
+                <p>
+                    Når jeg sitter her på mitt kontor på universitetet i ferd med å forberede en
+                    forelesningsrekke for mine studenter om «kultfenomener i litteraturen», faller
+                    det helt naturlig å tenke på «Bryggepraten». Jeg kom over disse tekstene ved en
+                    tilfeldighet i september 2017 da de først ble publisert som leserbrev i
+                    Sandefjords Blad. Da hadde «Hansen og Larsen» allerede noen tid vært aktive på
+                    Facebook med tekster og tegninger. Etter hvert kom det dessuten både en rekke
+                    bokutgivelser og nå sist, i november måned går det rykter om kunstutstilling. Vi
+                    snakker altså om en aktivitet i en rekke ulike medier og sjangere. Kan man av
+                    den grunn snakke om et «kultfenomen»?
+                </p>
+
+                <p>
+                    Det er muligens nødvendig å presisere at dette dreier seg om «Kult» med trykk på
+                    L'en. «Kuuuult» med særdeles lang U, er noe helt annet, selv om mange av
+                    Bryggepratens lesere nok har uttrykt at Hansen og Larsens dialoger også er
+                    kuuuule.
+                </p>
+            </section>
+
+            <section>
+                <h4 class='font-bold'>«BRYGGEPREATEN, ET LITTERÆRT KULTFENOMEN» del 2</h4>
+
+                <p>
+                    En «kult» eller «kultus» forstås gjerne som en form for praktisk utøvelse av en
+                    religion, men kan også bety stor eller nesegrus beundring for en person, noe man
+                    innen kirkelige kretser endog ville finne på å kalle <em>avgudsdyrkelse</em>. I
+                    likhet med begrepet «kultur» kommer ordet fra det latinske colere som betyr å
+                    dyrke. Imidlertid har man i moderne språkbruk også latt begrepet «kultfenomen»
+                    betegne noe eller noen som gjennom en kulturell aktivitet, preget av en viss
+                    «særhet», har vakt oppmerksomheten til en smalere gruppe spesielt interesserte,
+                    og der et typisk trekk gjerne kan være en viss opposisjon til eller motstand fra
+                    det mer elitepregede kulturelle establishment. Vi snakker altså ikke om
+                    dyrkelse/tilbedelse i tradisjonell religiøs forstand, men en form for felles
+                    forståelse av virkeligheten som skaper et eget samhold mellom tilhengerne av det
+                    aktuelle fenomen.
+                </p>
+
+                <p>
+                    Når vi så ser Bryggepraten i lys av dette: Hvordan skulle man så forklare at
+                    disse tekstene skulle være preget av en type «særhet»?
+                </p>
+            </section>
+
+            <section>
+                <h4 class='font-bold'>«BRYGGEPREATEN, ET LITTERÆRT KULTFENOMEN» del 3</h4>
+
+                <p>
+                    Noen vil nok mene at selve settingen er sær nok: At to aldrende herrer sitter på
+                    en bryggebenk og fører en samtale som man kan si karakteriseres av mimring,
+                    språklige misforståelser og svevende tankesprang. Mange vil nok mene at dette
+                    virker særdeles uinteressant for den allmenne leser. Når vi dessuten ser hvordan
+                    tekstene rent språklig ikke lar seg definere, men formelig stritter imot ethvert
+                    forsøk på å la seg kategorisere, og der, som jeg tidligere har skrevet i mitt
+                    essay om Bryggepratens språk, det eneste konsekvente trekk ved dette språket er
+                    dets inkonsekvens. Dette førte tidlig i høst til en storm av protester på
+                    sosiale medier, der en rekke kommentatorer med kvesset rødblyant og stor
+                    indignasjon hevdet at Hansen og Larsens utgave av sandefjordsdialekten ikke har
+                    det spor med virkeligheten å gjøre. Nå er det svært tvilsomt om herrene bak
+                    Bryggepraten i det hele tatt har påstått å ha gitt eller forsøkt å gi noen
+                    entydig og allmenngyldig definisjon av denne dialekten. Det er likevel særdeles
+                    interessant å se, når vi studerer nettopp Bryggepraten som kultfenomen, hvordan
+                    Hansen og Larsens tekster, midt i stormen av anklager, også blir tatt i forsvar
+                    av lesere som både har glede av det språklige, men som ikke minst evner å se
+                    andre dybder og kvaliteter i tekstene.
+                </p>
+            </section>
+
+            <section>
+                <h4 class='font-bold'>«BRYGGEPREATEN, ET LITTERÆRT KULTFENOMEN» del 4</h4>
+                <p>
+                    Når det gjelder Bryggepratens «særhet» må vi tilbake til det andre kriteriet som
+                    ble nevnt ovenfor, nemlig dette at et kultfenomen ofte lever og boltrer seg på
+                    siden av eller utenfor de etablerte og politisk korrekte kulturelle
+                    sammenhenger. Har Bryggepraten rett og slett et preg av opposisjonell
+                    undergrunnsvirksomhet? Det har faktisk, tidlig i Bryggepratens historie, kommet
+                    snøftende reaksjoner fra politikere høyt opp i byens bærende parti om at «dere
+                    kan jo skrive akkurat hva dere vil!» Det var i den aktuelle situasjonen ingen
+                    tvil om at dette måtte oppfattes som en anklage om politisk o.a. uansvarlighet.
+                    Men på dette punktet har Bryggepratens tilhengere, om vi kan kalle dem det, gitt
+                    uttrykk for at det er nettopp dette som gjør tekstene så interessante:
+                    Bryggepraten kan «tale Roma midt imot», for å trekke en parallell til Bjørnsons
+                    kjente strofe, og Bryggepraten slår til alle kanter, samtidig som den rutinerte
+                    Bryggepratleser nok vil se klare tendenser og grunnholdninger i tekstene.
+                </p>
+
+                <p>
+                    At det å stå for slike antiautoritære trekk også kan føre til motstand ble for
+                    øvrig demonstrert med stor tydelighet da Bryggepraten i høst ble lyst i bann av
+                    Sandefjords Blads redaktør. Var han bare «gått lei», eller hadde han fått klager
+                    fra innflytelsesrike menn i byens skjulte maktlabyrinter? Det vil vi vel aldri
+                    få vite. Faktum er at han nektet å trykke flere av Bryggepratens leserbrev,
+                    bl.a. med påstander om at tekstene ikke «passet inn i formatet på debattsidene»
+                    og at de var «for dagsaktuelle». Det faller naturlig å tenke på «De Hvite
+                    Hanskene» som får bred omtale i Bryggepratens andre bok, «Denne fuglen har
+                    fløyet», og som i lengre tid i det skjulte har hatt minst én finger med i styret
+                    av byen.
+                </p>
+            </section>
+
+            <section>
+                <h4 class='font-bold'>«BRYGGEPREATEN, ET LITTERÆRT KULTFENOMEN» del 5</h4>
+
+                <p>
+                    Vi drøftet i går nettopp lokalavisens refusering av Bryggepraten, og vil her
+                    hevde at dette faktisk kan sies å ha styrket tekstene som et lokalt litterært
+                    kultfenomen. Hansen og Larsen kan fortelle om utallige kommentarer fra lesere
+                    som savner dem i lokalavisens spalter, og tilsvarende mange nye medlemmer i
+                    Bryggepratens Facebookgruppe. Denne gruppen lever jo videre i beste velgående,
+                    og det er spennende å se, nå som Hansen og Larsen er i gang med sitt nye
+                    prosjekt, «Kunstkalender 2021» og en utstilling der de radbrekker
+                    verdenskunsten, om dette også vil ytterligere bidra til å øke deres kultstatus i
+                    byen vår. Ikke minst vil Kunstalenderen kunne bidra til kultifisering av hele
+                    Bryggepratkonseptet: Vi ser nemlig nå at det nærmest oppstår et (hemmelig) bror-
+                    og søsterskap bestående av personer som har denne, altså Kunstkalenderen, på
+                    veggen i sine hjem, og som således hver dag gjennom 2021 vil få en påminnelse om
+                    ikke bare Hansen og Larsens eksistens, men naturligvis også alt hva de står for,
+                    litterært, politisk, kulturelt osv. Disse personene vet kanskje ikke om
+                    hverandre, men de vil vite at det der ute er mange som dem selv, som deler disse
+                    opplevelsene og tankene i et ubrytelig fellesskap. De vil rette ryggen, se
+                    fremover, og si med Jan Erik Vold: «Det er håpløst, og vi gir oss ikke!»
+                </p>
+            </section>
+        </article>
+
+        <a href='#top' class='underline text-indigo-800 hover:text-indigo-600 place-self-center'
+            >&uarr; Tilbake til toppen &uarr;</a
+        >
+
+        <article
+            class='my-4 p-2 justify-self-center border-slate-100 bg-white rounded-sm drop-shadow-lg grid gap-4'
+        >
+            <h3 class='text-center font-semibold py-3 uppercase' id='artikkel3'>
+                ODE TIL NAVLEBESKUELSEN (?)
+            </h3>
+
+            <div class='grid leading-snug italic'>
+                <span class='font-bold'>En anmeldelse</span>
+                <span>8. november 2020</span>
+            </div>
+
+            <p>
+                På en splitter ny kulturarena i Sandefjord kan man nå se en helt annerledes
+                kunstutstilling: I «Et eget rom» hos EPOS forlag i kjelleren i Kirkegaten 8 vil
+                veggene i hele november måned være prydet av «Bryggepraten radbrekker
+                verdenskunsten», en samling arbeider i acryl, olje og digitaliserte tegninger utført
+                av de to bryggepraterne Hansen og Larsen.
+            </p>
+
+            <figure class='wp-block-image aligncenter size-full'>
+                <Image src={kalenderinnhold} alt='en collage av tegninger' loading='lazy' />
+            </figure>
+
+            <p>
+                Det første som slår en, når en dukker ned i undergrunnen, er hvor profesjonelt og
+                stilrent disse bildene er montert. Man skulle tro, siden kunstnerne tilsynelatende
+                er et par eldre, noe distré og til dels surrete herrer, at det lett kunne blitt et
+                salig rot på veggene, men her har kunstnerne tydeligvis fått meget god hjelp av en
+                erfaren og dyktig kvinne.
+            </p>
+
+            <p>
+                Bildene er, som antydet ovenfor, inspirert av de store mestere, men Hansen og Larsen
+                har på sitt særegne vis imitert og videreutviklet motivene. Man kan si at dette
+                gjennomgående består i at kunstnerne har malt seg selv og hverandre inn i de kjente
+                motivene, og det er vel nettopp dette som utgjør «radbrekkingen». Dette betegner jo
+                faktisk er en gammel torturmetode, og her er det muligens, vil noen hevde, publikum
+                som blir torturert ved å se de kjente motivene forvrengt, men likevel godt
+                gjenkjennelige.
+            </p>
+
+            <p>
+                Hansen og Larsen har tidligere både blitt utskjelt og møtt med oppgitt hoderysting
+                av lokale forståsegpåere for sin uortodokse bruk av språket, men fortsetter
+                kompromissløst å kaste seg ut på nye dybder, og denne gangen er det altså kunsten
+                det går ut over.
+            </p>
+
+            <p>
+                Bildene kan naturligvis i første omgang virke nokså navlebeskuende og selvopptatte,
+                selv om de to herrenes egne navler (heldigvis) ikke blir direkte eksponert i
+                bildene. Denne nærmest tvangsmessige selveksponering fører bl.a. til at Krøyers
+                kjente kvinner på Skagen Sønderstrand plutselig møter de to avmønstrede sailors fra
+                Bryggekanten i Sandefjord. Eller at de to gjemmer seg i - og titter fram fra -
+                gardinene og speilet i Harriet Backers interiør. Det er nesten som de to har forsøkt
+                å ta i bruk en ungdommelig «selfiekultur» med seg selv i sentrum, noe i retning av
+                at «kunstneren er kunstverket». Samtidig vil man også, om man ser nærmere etter, og
+                tolker bildene med en viss velvilje, ane at kunstnerne har flere kritiske
+                kommentarer til livet i byen og i verden.
+            </p>
+
+            <p>
+                Det er med andre ord en innholdsrik og tankevekkende utstilling, som bobler over av
+                spontan skaperkraft. Tolv av bildene er også produsert som en egen «Kunstkalender
+                2021», slik at publikum kan videreføre utstillingen på veggen hjemme gjennom hele
+                neste år.
+            </p>
+        </article>
+
+        <a href='#top' class='underline text-indigo-800 hover:text-indigo-600 place-self-center'
+            >&uarr; Tilbake til toppen &uarr;</a
+        >
+    </main>
+</Layout>

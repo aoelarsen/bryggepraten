@@ -1,0 +1,72 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+
+import bryggepratenBokomslag from '../../images/bokomslag/bryggepratenBoka.png';
+---
+
+<Layout title='bryggepraten-boka'>
+    <main class='p-4 mx-auto max-w-2xl grid gap-8 mb-8'>
+        <h2 class='text-xl md:text-3xl'>Bryggepraten - boka</h2>
+        <p class='font-bold'>Kun få eksemplarer igjen!</p>
+        <figure class='grid'>
+            <Image
+                loading='lazy'
+                src={bryggepratenBokomslag}
+                alt='bokomslaget til Bryggepraten bok nummer en'
+                class='place-self-center'
+            />
+            <figcaption class='italic'>
+                Observasjonær, funderingær, kommentarær, avsporingær, frie asssosiasjonær. Larsen og
+                Hansen har svaret.
+            </figcaption>
+        </figure>
+        <p>
+            Bryggepraten (bok 1): De to herrer kommer med sine observasjoner og kommentarer, ofte
+            med utgangspunkt i saker som har stått omtalt i Sandefjords Blad. De er mer eller mindre
+            saklige, mer eller mindre preget av kunnskap om hva sakene egentlig gjelder, men alltid
+            klare for å la assosiasjonene løpe fritt. Også der hvor disse ser ut til å løpe ut i det
+            lettere absurde. Og hele tiden på et slags nokså fritt sandefjordsmål, ubundet av
+            ortografiske og andre regler.
+        </p>
+        <p>
+            Boka selges til inntekt for det arbeidet som FJORDBLUES gjør ved å drifte musikkskole
+            for barn i Esteli, Nicaragua. Les mer om <a
+                href='#nicaragua'
+                class='underline text-indigo-800 hover:text-indigo-600'>Nicaragua-prosjektet</a
+            >.
+        </p>
+
+        <article
+            class='p-3 my-8 border border-slate-100 bg-white rounded-sm drop-shadow-lg leading-loose'
+        >
+            <h2 id='nicaragua' class='text-center'>Nicaragua-prosjektet</h2>
+            <p>
+                Fjordbluesfestivalen så dagens lys i 2004 på øya Lindholmen i Vestfjorden. Alle
+                musikerne spiller gratis. Overskuddet fra festivalen brukes til å drifte to
+                musikkskoler i Nicaragua for til sammen 50 barn og unge. Dette har blitt prosjektets
+                hovedmål og en viktig grunn til at mange mennesker besøker oss hvert år, den andre
+                helgen i august, og at artistene fortsatt spiller gratis.
+            </p>
+
+            <p>
+                Vårt engasjement i Nicaragua blir meget godt mottatt av våre publikummere, og en ny
+                dimensjon er knyttet til festivalen: Vi hjelper barn på andre siden av jordkloden
+                til et bedre liv. Vi driver altså to musikkskolegrupper oppe i fjellene i Esteli, en
+                by som ligger 800 meter over havet i Nicaragua. Våre lærere, som tidligere levde av
+                å spille på restauranter om kvelden, der de fikk lov, har sluttet med dette og
+                jobber kun for oss, 6 dager i uka. De får 5 USD i timen og lønnes for 12 timer i
+                uka. I tillegg får de ekstra betalt for lang kjørevei til den ene musikkskolen, samt
+                litt penger til mat. Lønnen er nok til å forsørge deres familier, og det har gitt
+                barna i familien muligheter til å studere. I tillegg til at 50 barn får en verdifull
+                og meningsfull fritid.
+            </p>
+
+            <p>
+                Vi finansierer også gitarer, fløyter, papir og blyanter, samt en del materiell og
+                utstyr til vår samarbeidspartner Movedupce. De siste årene har festivalen blitt
+                arrangert på Gokstad kystlag.
+            </p>
+        </article>
+    </main>
+</Layout>

@@ -1,0 +1,77 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import fuglenOmslag from '../../images/bokomslag/fuglenOmslag.png';
+---
+
+<Layout title='Denne fuglen har fløyet'>
+    <main class='p-4 mx-auto max-w-2xl grid gap-8 mb-8'>
+        <h2 class='text-xl md:text-3xl'>Denne fuglen har fløyet</h2>
+        <figure class='grid'>
+            <Image
+                loading='lazy'
+                src={fuglenOmslag}
+                alt='bokomslaget til Denne Fuglen Har Fløyet'
+                class='place-self-center'
+            />
+            <figcaption class='italic'>Bryggepratens krimbok i salg fortsatt!</figcaption>
+        </figure>
+        <p>
+            Etter braksuksessen med sin første bok Bryggepraten, har forfatterne sendt de voksne
+            ”Hardy-guttene” ut for å løse en krimgåte. Det meste av Jahres formue er kjent, men
+            denne historien gir helt andre dimensjoner til uttrykket formue. Hadde virkelig Jahre
+            kommet over en av verdens mest ettertraktede skatter? Hansen og Larsen må ut på en
+            farefull ferd for å finne løsningen. Dette kan være en umusikalsk bok for borgerne av
+            Anders Jahres hjemby.
+        </p>
+
+        <aside
+            class='p-2 my-8 border border-slate-100 bg-white rounded-sm drop-shadow-lg leading-loose'
+        >
+            <blockquote>
+                <h2 class='font-bold'>Bokanmeldelse av T. Songedal</h2>
+                <p>
+                    Jeg koste meg med denne boka. Jørund Holst-Hansen og Birger Dyve Larsen leker
+                    som vi er vant til i &rdquo;Bryggepraten&rdquo;, både med karakterene, språket,
+                    filosofi, historie og politikk.
+                </p>
+                <p>
+                    Her møter vi de to kjenningene Hansen og Larsen, som er like surrete og
+                    filosofiske som de pleier, der de gjennom fortellingen er innom historie, både
+                    lokal, nasjonal og internasjonal. De er også stadig innom politikk og filosofi,
+                    slik vi er vant til. For en som har studert teater er det også interessant at de
+                    bruker Aristoteles sin &rdquo;poetikk&rdquo;, når de snakker om dramaturgien i
+                    en historie.
+                </p>
+                <p>
+                    De to forfatterne er tydelig også Beatlestilhengere. Dette kommer fram gjennom
+                    både bokas tittel og titlene på kapitlene, og gjennom stadige små Beatles-drypp
+                    som er med på å binde historien sammen.
+                </p>
+                <p>
+                    Jeg er ikke lokalkjent verken i Sandefjord eller Andalucia, hvor mye av
+                    handlingen foregår, men det gjør absolutt ikke noe, for historien bæres hele
+                    tiden av karakterene, som også inkluderer en eldre svenske og en forteller. Å
+                    bruke en forteller er et godt virkemiddel, og en fin måte å drive historien
+                    videre når Hansen og Larsen surrer rundt på sin vante måte og er på vei til å
+                    rote seg bort.
+                </p>
+                <p>
+                    Humoren til Hansen og Larsen er som forventet, og det er også noe av det som
+                    gjorde at jeg koste meg.
+                </p>
+            </blockquote>
+        </aside>
+
+        <figure class='p-4'>
+            <iframe
+                src='https://open.spotify.com/embed/playlist/5oMlhvEhrUSrd5Ga1QVmMI?utm_source=generator'
+                width='100%'
+                height='650'
+                frameborder='0'
+                allowfullscreen=''
+                allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture'
+            ></iframe>
+        </figure>
+    </main>
+</Layout>

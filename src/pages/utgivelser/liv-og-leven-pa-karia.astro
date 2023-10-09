@@ -1,0 +1,50 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+
+import kariaOmslag from '../../images/bokomslag/kariaOmslag.png';
+import oyvind from '../../images/oyvind.png';
+---
+
+<Layout title='Liv og leven på Karia'>
+    <main class='p-4 mx-auto max-w-2xl grid gap-8 mb-8'>
+        <h2 class='text-xl md:text-3xl'>Liv og leven på Karia</h2>
+        <figure class='grid'>
+            <Image
+                loading='lazy'
+                src={kariaOmslag}
+                alt='bokomslaget til Liv Og Leven På Karia'
+                class='place-self-center'
+            />
+        </figure>
+        <p>
+            <span class='font-semibold'>Øyvind Børresen</span> (f.1956) er født i Larvik og vokste
+            opp på Karistranda på Torstrand. I diktform skriver han om minner fra barndommen på
+            1960-tallet. Med varme og innsikt forteller han om originale personer og Karistranda
+            eller Karia som han kaller det.
+        </p>
+        <figure class='max-w-[90vw] grid'>
+            <Image
+                loading='lazy'
+                src={oyvind}
+                alt='illustrasjon av Øyvind Børresen'
+                class='md:max-w-[400px] place-self-center'
+            />
+        </figure>
+
+        <figure
+            class='w-3/4 md:w-1/2 p-2 justify-self-center border-slate-100 bg-white rounded-sm drop-shadow-lg'
+        >
+            <blockquote class='italic p-2 leading-loose'>
+                Der Strandgata begynner <br />
+                 og Havnegata går på tvers, <br />
+                 Der nede ligger «Karia» <br />
+                 mitt barndoms univers
+            </blockquote>
+            <figcaption class='p-2 my-4 text-right'>
+                &hyphen; Øyvind Børresen,<br />
+                <cite>Liv og leven på Karia</cite>
+            </figcaption>
+        </figure>
+    </main>
+</Layout>

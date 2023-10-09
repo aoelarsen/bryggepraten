@@ -1,0 +1,72 @@
+---
+import { Image } from 'astro:assets';
+
+import Layout from '../layouts/Layout.astro';
+import Prisliste from '../components/prisliste';
+
+import hansenLarsen from '../images/hansenLarsen.png';
+import hansen from '../images/H.png';
+import larsen from '../images/L.png';
+---
+
+<Layout title='Bryggepraten.no'>
+    <main class='p-4 mx-auto max-w-2xl grid gap-8'>
+        <h2 class='text-center md:text-3xl'>Velkommen til Bryggepraten!</h2>
+        <section class='grid md:grid-cols-3 my-8'>
+            <figure class='hidden md:block'>
+                <Image src={larsen} alt='Tegnig av Larsen' format='png' />
+            </figure>
+            <div class='flex flex-col justify-center'>
+                <figure class='md:hidden'>
+                    <Image src={hansenLarsen} alt='tegning av Hansen og Larsen' format='png' />
+                </figure>
+                <h3 class='py-4 font-semibold text-center md:text-right md:text-3xl'>
+                    Hansens og Larsens forunderlige verden
+                </h3>
+                <p class='py-12 px-2 md:px-0 text-'>
+                    Her finner du også informasjon om Bryggekanten forlag; et forlag som har gitt ut
+                    blant annet Bryggepraten bøkene
+                </p>
+            </div>
+            <figure class='hidden md:block'>
+                <Image src={hansen} alt='Tegnig av Hansen' format='png' />
+            </figure>
+        </section>
+        <section class='border border-dotted border-[#efb261] rounded-sm w-full'>
+            <h4 class='p-2 text-sm bg-[#efb261] font-bold'>Siste nytt fra forlaget</h4>
+            <article class='p-2 m-2'>
+                <h2 class='text-center'>Ny bok! Ny bok! Ny bok!</h2>
+                <p>
+                    BRYGGEKANTEN FORLAG vil komme med en ganske <em>unik</em> utgivelse: Boka vil
+                    delvis bestå av et manuskript som avdekker nye og ukjente sider ved Sandefjords
+                    historie. Forfatteren av denne teksten har beklageligvis forsvunnet, redaksjonen
+                    har ikke oppnådd kontakt med henne etter at vi mottok manuskriptet. Boken vil
+                    derfor også gjøre rede for forlagets jakt på forfatteren. En rystende og nesten
+                    usannsynlig historie! Fri for overdreven sandefjordsdialekt. Dette er ikke
+                    Bryggeparten.
+                </p><p>
+                    Utgivelsen <span class='font-bold'>«Underveis kan du late som du flyr»</span>
+                    kan forhåndsbestilles direkte fra forlaget.
+                </p><p>
+                    Vi vil også gi våre trofaste lesere anledning til å støtte utgivelsen ved å få
+                    sitt navn på trykk &ndash; naturligvis med ydmyke og hjertelige takksigelser fra
+                    forlaget.
+                </p>
+                <p>- Ordinær pris vil være kr 299,-</p>
+                <p>
+                    - Gjør en bindende forhåndsbestilling innen <strong>23.august</strong>, du får
+                    navnet på trykk, og prisen vil være kun kr <strong>249,-</strong>
+                </p>
+                <p>Meld så snart som mulig og innen23. august</p>
+            </article>
+        </section>
+        <aside class='grid'>
+            <Prisliste client:visible />
+            <a
+                href='/bryggebutikken'
+                class='p-2 m-2 border text-center rounded-sm w-full md:w-36 justify-self-center md:justify-self-start shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100 bg-[#efb261] text-black text-secondary hover:text-amber-100 hover:bg-yellow-900'
+                >Bestill bøker her</a
+            >
+        </aside>
+    </main>
+</Layout>

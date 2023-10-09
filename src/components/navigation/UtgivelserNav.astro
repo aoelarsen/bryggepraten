@@ -1,0 +1,165 @@
+---
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1);
+---
+
+<div
+    class='relative inline-block text-left place-self-center w-full md:place-self-end lg:w-1/2 col-span-full md:col-auto md:col-start-3'
+>
+    <div>
+        <button
+            type='button'
+            class='inline-flex w-full justify-center rounded-sm border border-gray-300 px-4 py-2 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100 bg-[#efb261] text-black text-secondary hover:text-amber-100 hover:bg-yellow-900'
+            id='utgivelserBtn'
+            aria-expanded='true'
+            aria-haspopup='true'
+        >
+            Utgivelser
+            <!-- Heroicon name: mini/chevron-down -->
+            <svg
+                class='-mr-1 ml-2 h-5 w-5'
+                xmlns='http://www.w3.org/2000/svg'
+                viewBox='0 0 20 20'
+                fill='currentColor'
+                aria-hidden='true'
+            >
+                <path
+                    fill-rule='evenodd'
+                    d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z'
+                    clip-rule='evenodd'></path>
+            </svg>
+        </button>
+    </div>
+    <div
+        class='hidden absolute right-0 z-10 mt-2 w-full md:w-56 lg:w-full origin-top-right rounded-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'
+        role='menu'
+        aria-orientation='vertical'
+        aria-labelledby='menu-button'
+        tabindex='-1'
+        id='utgivelserMenu'
+    >
+        <div class='py-1 flex flex-col w-full' role='none'>
+            {
+                currentPath === 'utgivelser/bryggepraten-boka' ? (
+                    <a
+                        href='/utgivelser/bryggepraten-boka'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                        aria-current='page'
+                    >
+                        Bryggepraten Boka
+                    </a>
+                ) : (
+                    <a
+                        href='/utgivelser/bryggepraten-boka'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                    >
+                        Bryggepraten Boka
+                    </a>
+                )
+            }
+            {
+                currentPath === 'utgivelser/denne-fuglen-har-floyet' ? (
+                    <a
+                        href='/utgivelser/denne-fuglen-har-floyet'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                        aria-current='page'
+                    >
+                        Denne Fuglen Har Fløyet
+                    </a>
+                ) : (
+                    <a
+                        href='/utgivelser/denne-fuglen-har-floyet'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                    >
+                        Denne Fuglen Har Fløyet
+                    </a>
+                )
+            }
+            {
+                currentPath === 'utgivelser/veiene-inn' ? (
+                    <a
+                        href='/utgivelser/veiene-inn'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                        aria-current='page'
+                    >
+                        Veiene Inn
+                    </a>
+                ) : (
+                    <a
+                        href='/utgivelser/veiene-inn'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                    >
+                        Veiene Inn
+                    </a>
+                )
+            }
+            {
+                currentPath === 'utgivelser/underveis-kan-du-late-som-du-flyr' ? (
+                    <a
+                        href='/utgivelser/underveis-kan-du-late-som-du-flyr'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                        aria-current='page'
+                    >
+                        Underveis kan du late som du flyr
+                    </a>
+                ) : (
+                    <a
+                        href='/utgivelser/underveis-kan-du-late-som-du-flyr'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                    >
+                        Underveis kan du late som du flyr
+                    </a>
+                )
+            }
+            <hr />
+            {
+                currentPath === 'utgivelser/liv-og-leven-pa-karia' ? (
+                    <a
+                        href='/utgivelser/liv-og-leven-pa-karia'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                        aria-current='page'
+                    >
+                        Liv og leven på Karia
+                    </a>
+                ) : (
+                    <a
+                        href='/utgivelser/liv-og-leven-pa-karia'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                    >
+                        Liv og leven på Karia
+                    </a>
+                )
+            }
+            {
+                currentPath === 'utgivelser/dribble' ? (
+                    <a
+                        href='/utgivelser/dribble'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                        aria-current='page'
+                    >
+                        Dribble
+                    </a>
+                ) : (
+                    <a
+                        href='/utgivelser/dribble'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                    >
+                        Dribble
+                    </a>
+                )
+            }
+        </div>
+    </div>
+</div>
+
+<script is:inline>
+const dropBtn = document.getElementById('utgivelserBtn');
+const dropMenu = document.getElementById('utgivelserMenu');
+
+const handleDropDown = () => {
+    dropMenu.classList.contains('hidden')
+        ? dropMenu.classList.replace('hidden', 'block')
+        : dropMenu.classList.replace('block', 'hidden');
+};
+dropBtn.addEventListener('click', handleDropDown);
+</script>

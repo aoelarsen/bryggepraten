@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Prisliste from '../components/prisliste';
+
+import Bestilling from '../components/Bestilling.astro';
+---
+
+<Layout title='Bestill bøkene'>
+    <main class='p-4 mx-auto max-w-2xl grid gap-12'>
+        <h2>Bryggebutikken</h2>
+        <Prisliste client:load />
+        <Bestilling />
+    </main>
+</Layout>
