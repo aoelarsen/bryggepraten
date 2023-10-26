@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 
+import biografiDavidsen from '../images/presse/biografien_over_davidsen.png';
 import sbKunsts1 from '../images/presse/sb-1-11-2020-s-1.jpg';
 import sbKunsts2 from '../images/presse/sb-1-11-2020-s-2.jpg';
 import veienePresse from '../images/presse/veiene-Inn-SB.png';
@@ -14,6 +15,26 @@ import bryggepratSB from '../images/presse/SB-12-04-2018.jpg';
     <main class='p-4 mx-auto max-w-2xl grid gap-12'>
         <h2 id='top' class="class='md:text-3xl'">Praten i pressa</h2>
         <p>En samling av omtaler og presseartikler om Bryggepraten</p>
+
+        <section
+            class='my-4 p-2 justify-self-center border-slate-100 bg-white rounded-sm drop-shadow-lg grid gap-4'
+        >
+            <h3 class='text-lg font-bold'>Biografien over Davidsen i Sandefjords Blad</h3>
+            <div class='grid leading-snug italic'>
+                <span>26.10.2023</span>
+            </div>
+            <figure class='grid place-content-center gap-4'>
+                <Image
+                    loading='lazy'
+                    src={biografiDavidsen}
+                    alt='Avisutklipp med omtale av Kunstkalenderen'
+                />
+            </figure>
+        </section>
+
+        <a href='#top' class='underline text-indigo-800 hover:text-indigo-600 place-self-center'
+            >&uarr; Tilbake til toppen &uarr;</a
+        >
 
         <section
             class='my-4 p-2 justify-self-center border-slate-100 bg-white rounded-sm drop-shadow-lg grid gap-4'
