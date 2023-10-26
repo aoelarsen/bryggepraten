@@ -3,11 +3,12 @@ import { Image } from 'astro:assets';
 
 import Layout from '../layouts/Layout.astro';
 import Prisliste from '../components/prisliste';
+import SisteNytt from '../components/SisteNytt.astro';
 
 import hansenLarsen from '../images/hansenLarsen.png';
 import hansen from '../images/H.png';
 import larsen from '../images/L.png';
-import biografien from '../images/presse/biografien_over_davidsen.png';
+// import biografien from '../images/presse/biografien_over_davidsen.png';
 ---
 
 <Layout title='Bryggepraten.no'>
@@ -33,18 +34,7 @@ import biografien from '../images/presse/biografien_over_davidsen.png';
                 <Image src={hansen} alt='Tegnig av Hansen' />
             </figure>
         </section>
-        <section class='border border-dotted border-[#efb261] rounded-sm w-full'>
-            <h4 class='p-2 text-sm bg-[#efb261] font-bold'>Siste nytt fra forlaget</h4>
-            <article class='p-2 m-2'>
-                <h2 class='text-center'>Bryggepraten i Avisa</h2>
-                <Image
-                    src={biografien}
-                    alt='Avisutklipp fra Sandefjords Blad - artikkelen handler om'
-                    loading='lazy'
-                />
-                <p>Da er den nye boka omtalt</p>
-            </article>
-        </section>
+        <SisteNytt />
         <aside class='grid'>
             <Prisliste client:visible />
             <a
