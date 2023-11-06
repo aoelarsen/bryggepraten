@@ -1,0 +1,106 @@
+---
+export const prerender = false;
+// import Layout from '../../layouts/Layout.astro';
+import BakromLayout from '../../layouts/BakromLayout.astro';
+
+import { auth } from '../../lib/lucia';
+import { LibsqlError } from '@libsql/client';
+
+let errorMessage = '';
+let usernameInput = '';
+
+// Sjekk skjemainnput
+if (Astro.request.method === 'POST') {
+    const formData = await Astro.request.formData();
+    const username = formData.get('username');
+    const password = formData.get('password');
+    console.log(username);
+    console.log(password);
+    if (typeof username === 'string') {
+        usernameInput = username;
+    }
+    // Enkel sjekk
+    const validUsername =
+        typeof username === 'string' && username.length >= 4 && username.length <= 31;
+    const validPassword =
+        typeof password === 'string' && password.length >= 6 && password.length <= 255;
+    if (validUsername && validPassword) {
+        try {
+            const user = await auth.createUser({
+                key: {
+                    providerId: 'username', // auth method
+                    providerUserId: username.toLowerCase(), // unique id when using "username" auth method
+                    password, // hashed by Lucia
+                },
+                attributes: {
+                    username,
+                },
+            });
+            const session = await auth.createSession({
+                userId: user.userId,
+                attributes: {},
+            });
+            console.log(user.userId);
+            console.log(session);
+            Astro.locals.auth.setSession(session); // set session cookie
+            return Astro.redirect('./', 302); // videresend til startsiden
+        } catch (e) {
+            console.log(e);
+            // denne delen er avhengig av server og SQL-dialekten
+            if (e instanceof LibsqlError && e.code === 'SERVER_ERROR') {
+                console.error(e.code);
+                errorMessage = e.code;
+            }
+            if (e instanceof LibsqlError && e.code === 'LIBSQL_CONSTRAINT_UNIQUE') {
+                errorMessage = 'Brukernavnet er allerede i bruk.';
+                Astro.response.status = 400;
+            } else {
+                errorMessage = 'Ukjent feil. Sjekk konsollen.';
+                Astro.response.status = 500;
+            }
+        }
+    }
+} else {
+    errorMessage = 'Feil i input.';
+    Astro.response.status = 400;
+}
+
+const session = await Astro.locals.auth.validate();
+if (!session) return Astro.redirect('/bakrommet/login', 302);
+---
+
+<BakromLayout title='Lag bruker'>
+    <main>
+        <h2>Opprett nye brukere</h2>
+        <form method='POST'>
+            <label class='flex flex-col w-full' for='username'
+                >Brukernavn
+                <input
+                    type='text'
+                    name='username'
+                    id='username'
+                    class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                /></label
+            >
+            <label class='flex flex-col w-full' for='password'
+                >Passord
+                <input
+                    type='password'
+                    name='password'
+                    id='password'
+                    class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                /></label
+            >
+            <br />
+            <input
+                name='Logg inn'
+                type='submit'
+                value='Logg inn'
+                class='py-2 rounded-sm bg-[#efb261] text-black text-secondary cursor-pointer hover:text-amber-100 hover:bg-yellow-900 md:w-1/2 md:justify-self-end'
+            />
+        </form>
+        <p class='error'>{errorMessage}</p>
+    </main>
+</BakromLayout>
+
+ ---

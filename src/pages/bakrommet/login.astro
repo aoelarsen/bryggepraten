@@ -1,0 +1,90 @@
+---
+export const prerender = false;
+import Layout from '../../layouts/Layout.astro';
+
+import { auth } from '../../lib/lucia.ts';
+import { LuciaError } from 'lucia';
+
+let errorMessage = '';
+let usernameInput = '';
+
+// Sjekk input fra skjemaet
+if (Astro.request.method === 'POST') {
+    const formData = await Astro.request.formData();
+    const username = formData.get('username');
+    const password = formData.get('password');
+    // enkel sjekk
+    if (typeof username === 'string') {
+        usernameInput = username;
+    }
+
+    const validUsername =
+        typeof username === 'string' && username.length >= 4 && username.length <= 31;
+    const validPassword =
+        typeof password === 'string' && password.length >= 6 && password.length <= 255;
+
+    if (validUsername && validPassword) {
+        try {
+            // finn bruker ved nøkkel og validert passord
+            const key = await auth.useKey('username', username.toLowerCase(), password);
+            const session = await auth.createSession({
+                userId: key.userId,
+                attributes: {},
+            });
+            console.log(session);
+            Astro.locals.auth.setSession(session); // lagre sesjonen
+            return Astro.redirect('/bakrommet', 302);
+        } catch (e) {
+            console.log(e);
+            if (
+                e instanceof LuciaError &&
+                (e.message === 'AUTH_INVALID_KEY_ID' || e.message === 'AUTH_INVALID_PASSWORD')
+            ) {
+                // brukeren eksisterer ikke eller har skrevet feil passord
+                errorMessage = 'Feil brukernavn eller passord';
+                Astro.response.status = 400;
+            } else {
+                errorMessage = 'Oooops, her er det noe feil. Prøv igjen senere';
+                Astro.response.status = 500; // intern serverfeil
+            }
+        }
+    } else {
+        errorMessage = 'Feil brukernavn eller passord';
+        Astro.response.status = 400;
+    }
+}
+---
+
+<Layout title='Logg inn'>
+    <main class='p-4 mx-auto max-w-2xl grid gap-8'>
+        <h2>Logg inn</h2>
+        <form method='POST'>
+            <label class='flex flex-col w-full' for='username'
+                >Brukernavn
+                <input
+                    type='text'
+                    name='username'
+                    id='username'
+                    class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                /></label
+            >
+            <label class='flex flex-col w-full' for='password'
+                >Passord
+                <input
+                    type='password'
+                    name='password'
+                    id='password'
+                    class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                /></label
+            >
+            <br />
+            <input
+                name='Logg inn'
+                type='submit'
+                value='Logg inn'
+                class='py-2 rounded-sm bg-[#efb261] text-black text-secondary cursor-pointer hover:text-amber-100 hover:bg-yellow-900 md:w-1/2 md:justify-self-end'
+            />
+        </form>
+        <p class='error'>{errorMessage}</p>
+    </main>
+</Layout>

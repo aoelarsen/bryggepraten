@@ -1,0 +1,18 @@
+---
+export const prerender = false;
+import Layout from '../../layouts/Layout.astro';
+
+const session = await Astro.locals.auth.validate();
+if (!session) return Astro.redirect('/bakrommet/login', 302);
+---
+
+<Layout title='Bakrommet'>
+    <main class='p-4 mx-auto max-w-2xl grid gap-8'>
+        <h2 class='text-center'>Bakrommet</h2>
+        <p>Velkommen, {session.user.username}!</p>
+        <p>Du er nå logget inn.</p>
+        <form method='POST' action='/bakrommet/logout'>
+            <button type='submit'>Logg ut</button>
+        </form>
+    </main>
+</Layout>
