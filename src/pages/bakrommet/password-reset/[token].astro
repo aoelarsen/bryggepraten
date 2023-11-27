@@ -1,0 +1,79 @@
+---
+export const prerender = false;
+
+import BakromLayout from '../../../layouts/BakromLayout.astro';
+import { auth } from '../../../lib/lucia';
+import { validatePasswordResetToken } from '../../../lib/token';
+
+let errorMessage = '';
+
+if (Astro.request.method === 'POST') {
+    const formData = await Astro.request.formData();
+    const password = formData.get('password');
+    // basic check
+    const validatePassword =
+        typeof password === 'string' && password.length >= 6 && password.length <= 255;
+    if (validatePassword) {
+        try {
+            const { token } = Astro.params;
+            console.log('----> token fra passordnullstilling-token', token);
+            if (!token) {
+                return new Response(null, { status: 400 });
+            }
+            const userId = await validatePasswordResetToken(token);
+            console.log('----> userId fra passordnullstilling-token', userId);
+            let user = await auth.getUser(userId);
+            console.log('----> user fra passordnullstilling-token', user);
+            console.log('----> user.userId fra passordnullstilling-token', user.userId);
+            console.log('----> user.email fra passordnullstilling-token', user.email);
+
+            await auth.invalidateAllUserSessions(user.userId);
+            try {
+                await auth.updateKeyPassword('email', user.email, password);
+            } catch (e) {
+                console.error(e);
+            }
+
+            if (!user.emailVerified) {
+                user = await auth.updateUserAttributes(user.userId, {
+                    email_verified: Number(true),
+                });
+            }
+            const session = await auth.createSession({
+                userId: user.userId,
+                attributes: {},
+            });
+            Astro.locals.auth.setSession(session);
+            return Astro.redirect('/bakrommet');
+        } catch (e) {
+            console.error(e);
+            errorMessage = 'Feil eller utløpt passordlink';
+            Astro.response.status = 400;
+        }
+    } else {
+        errorMessage = 'Feil passord';
+        Astro.response.status = 400;
+    }
+}
+---
+
+<BakromLayout title='Passordnullstilling'>
+    <main class='p-4 mx-auto max-w-2xl grid gap-8'>
+        <h2>Reset password</h2>
+        <form method='POST' class='grid gap-2 px-3 py-4 md:px-4'>
+            <label for='password' class='flex flex-col w-full'
+                >Nytt passord
+                <input
+                    name='password'
+                    id='password'
+                    class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                /></label
+            >
+            <input
+                type='submit'
+                class='py-2 rounded-sm bg-[#efb261] text-black text-secondary cursor-pointer hover:text-amber-100 hover:bg-yellow-900 md:w-1/2 md:justify-self-end'
+            />
+        </form>
+        <p class='error'>{errorMessage}</p>
+    </main>
+</BakromLayout>

@@ -1,4 +1,5 @@
 export const prerender = false;
+
 import { auth } from "../../lib/lucia";
 
 import type { APIRoute } from "astro";

@@ -1,0 +1,44 @@
+---
+export const prerender = false;
+
+import BakromLayout from '../../../layouts/BakromLayout.astro';
+
+import { sendEmailVerificationLink } from '../../../lib/email';
+import { generateEmailVerificationToken } from '../../../lib/token';
+
+let success = false;
+let errorMessage: string | null = null;
+
+const session = await Astro.locals.auth.validate();
+if (!session) Astro.redirect('/bakrommet/login');
+if (session.user.emailVerified) Astro.redirect('/bakrommet');
+
+if (Astro.request.method === 'POST') {
+    try {
+        const token = await generateEmailVerificationToken(session.user.userId);
+        await sendEmailVerificationLink(token);
+        success = true;
+    } catch (e) {
+        errorMessage = 'Noe gikk galt';
+        Astro.response.status = 500;
+        console.error(e);
+    }
+}
+---
+
+<BakromLayout title='Epost verifisering'>
+    <main class='p-4 mx-auto max-w-2xl grid gap-8'>
+        <h2>Epost verifisering</h2>
+        <p>Your email verification link was sent to your inbox (i.e. console).</p>
+        <h2>Send epost-verifiseringslink på nytt</h2>
+        <form method='POST' class='grid gap-2 px-3 py-4 md:px-4'>
+            <input
+                type='submit'
+                value='Send på nytt'
+                class='py-2 mt-4 rounded-sm bg-[#efb261] text-black text-secondary cursor-pointer hover:text-amber-100 hover:bg-yellow-900 md:w-1/2 md:justify-self-start uppercase'
+            />
+        </form>
+        {success && <p>Your verification link was resent</p>}
+        <p class='error'>{errorMessage}</p>
+    </main>
+</BakromLayout>

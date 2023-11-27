@@ -1,37 +1,44 @@
 ---
 export const prerender = false;
-import Layout from '../../layouts/Layout.astro';
+
+import BakromLayout from '../../layouts/BakromLayout.astro';
 
 import { auth } from '../../lib/lucia.ts';
 import { LuciaError } from 'lucia';
+import { isValidEmail } from '../../lib/email.ts';
 
 let errorMessage = '';
 let usernameInput = '';
+let emailInput = '';
 
 // Sjekk input fra skjemaet
 if (Astro.request.method === 'POST') {
     const formData = await Astro.request.formData();
-    const username = formData.get('username');
+    const email = formData.get('email');
+    // const username = formData.get('username');
     const password = formData.get('password');
     // enkel sjekk
-    if (typeof username === 'string') {
-        usernameInput = username;
+    // if (typeof username === 'string') {
+    //     usernameInput = username;
+    // }
+    if (typeof email === 'string') {
+        emailInput = email;
     }
 
-    const validUsername =
-        typeof username === 'string' && username.length >= 4 && username.length <= 31;
+    // const validUsername =
+    //     typeof username === 'string' && username.length >= 4 && username.length <= 31;
     const validPassword =
         typeof password === 'string' && password.length >= 6 && password.length <= 255;
 
-    if (validUsername && validPassword) {
+    if (isValidEmail(email) && validPassword) {
         try {
             // finn bruker ved nøkkel og validert passord
-            const key = await auth.useKey('username', username.toLowerCase(), password);
+            const key = await auth.useKey('email', email.toLowerCase(), password);
             const session = await auth.createSession({
                 userId: key.userId,
                 attributes: {},
             });
-            console.log(session);
+
             Astro.locals.auth.setSession(session); // lagre sesjonen
             return Astro.redirect('/bakrommet', 302);
         } catch (e) {
@@ -53,18 +60,35 @@ if (Astro.request.method === 'POST') {
         Astro.response.status = 400;
     }
 }
+
+const session = await Astro.locals.auth.validate();
+if (session) {
+    if (!session.user.emailVerified) {
+        return Astro.redirect('/epost-verifisering');
+    }
+    return Astro.redirect('/bakrommet');
+}
 ---
 
-<Layout title='Logg inn'>
+<BakromLayout title='Logg inn'>
     <main class='p-4 mx-auto max-w-2xl grid gap-8'>
         <h2>Logg inn</h2>
         <form method='POST'>
-            <label class='flex flex-col w-full' for='username'
+            <!-- <label class='flex flex-col w-full' for='username'
                 >Brukernavn
                 <input
                     type='text'
                     name='username'
                     id='username'
+                    class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                /></label
+            > -->
+            <label class='flex flex-col w-full' for='email'
+                >E-post
+                <input
+                    type='email'
+                    name='email'
+                    id='email'
                     class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
                 /></label
             >
@@ -87,4 +111,4 @@ if (Astro.request.method === 'POST') {
         </form>
         <p class='error'>{errorMessage}</p>
     </main>
-</Layout>
+</BakromLayout>

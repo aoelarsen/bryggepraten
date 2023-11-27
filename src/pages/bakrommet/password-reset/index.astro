@@ -1,0 +1,80 @@
+---
+export const prerender = false;
+
+import { eq } from 'drizzle-orm';
+
+import { db } from '../../../lib/db';
+import { user } from '../../../lib/authSchema';
+import { sendPasswordResetLink, isValidEmail } from '../../../lib/email';
+import { auth } from '../../../lib/lucia';
+import { generatePasswordResetToken } from '../../../lib/token';
+
+import BakromLayout from '../../../layouts/BakromLayout.astro';
+
+let emailInput = '';
+let success = false;
+let errorMessage: string | null = null;
+
+if (Astro.request.method === 'POST') {
+    const formData = await Astro.request.formData();
+    const email = formData.get('email');
+
+    if (typeof email === 'string') {
+        emailInput = email;
+    }
+    if (isValidEmail(email)) {
+        try {
+            const storedUser = await db.select().from(user).where(eq(user.email, email)).execute();
+            console.log('storedeUser', storedUser);
+            if (storedUser) {
+                const user = await auth.transformDatabaseUser(storedUser[0]);
+                console.log('userId', user.userId);
+
+                const token = await generatePasswordResetToken(user.userId);
+                await sendPasswordResetLink(token);
+                success = true;
+            } else {
+                errorMessage = 'User does not exist';
+                Astro.response.status = 400;
+            }
+        } catch (e) {
+            console.error(e);
+            errorMessage = 'Noe gikk galt. Prøv igjen senere.';
+            Astro.response.status = 500;
+        }
+    } else {
+        errorMessage = 'Ugyldig epost';
+        Astro.response.status = 400;
+    }
+}
+---
+
+<BakromLayout title='Nullstill bakrom'>
+    <main class='p-4 mx-auto max-w-2xl grid gap-8'>
+        <h2>Nullstill passord</h2>
+        <form method='POST' class='grid gap-2 px-3 py-4 md:px-4'>
+            <label for='email' class='flex flex-col w-full'
+                >Epost
+                <input
+                    name='email'
+                    id='email'
+                    value={emailInput}
+                    class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                /></label
+            >
+            <input
+                type='submit'
+                value='Nullstill passord'
+                class='py-2 rounded-sm bg-[#efb261] text-black text-secondary cursor-pointer hover:text-amber-100 hover:bg-yellow-900 md:w-1/2 md:justify-self-end'
+            />
+        </form>
+        <p class='error'>{errorMessage}</p>
+        {
+            success ? (
+                <p>Link for å nullstille passordet har blitt sendt til din epostadresse</p>
+            ) : null
+        }
+        <!-- <a href='/bakrommet'>Sign in</a> -->
+    </main>
+</BakromLayout>
+ ../../../lib/authSchema

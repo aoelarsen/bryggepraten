@@ -1,0 +1,23 @@
+---
+import { Image } from 'astro:assets';
+
+import AdminNav from './navigation/AdminNav.astro';
+import forlagsHerrer from '../images/forlagsherrer.jpg';
+---
+
+<header
+    class='p-2 md:p-7 lg:p-10 grid grid-cols-[auto,1fr,auto] lg:grid-cols-[auto,1fr,auto,auto] grid-rows-2 md:grid-rows-1 gap-2 md:gap-4'
+>
+    <a href='/bakrommet' class='self-center w-16 md:w-full'>
+        <Image src={forlagsHerrer} alt='Logo Bryggepraten forlag' width='100' />
+    </a>
+
+    <div class='grid grid-flow-col place-content-center md:place-content-start gap-2'>
+        <a href='/bakrommet'>
+            <h1 class='font-bold text-2xl md:text-3xl'>Bryggepratens bakrom</h1>
+            <p>Administrasjonskontoret</p>
+        </a>
+    </div>
+
+    <AdminNav />
+</header>

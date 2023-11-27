@@ -2,53 +2,62 @@
 export const prerender = false;
 // import Layout from '../../layouts/Layout.astro';
 import BakromLayout from '../../layouts/BakromLayout.astro';
+import { isValidEmail, sendEmailVerificationLink } from '../../lib/email.ts';
 
 import { auth } from '../../lib/lucia';
 import { LibsqlError } from '@libsql/client';
+import { generateEmailVerificationToken } from '../../lib/token.ts';
 
 let errorMessage = '';
 let usernameInput = '';
+let emailInput = '';
 
 // Sjekk skjemainnput
 if (Astro.request.method === 'POST') {
     const formData = await Astro.request.formData();
     const username = formData.get('username');
+    const email = formData.get('email');
     const password = formData.get('password');
-    console.log(username);
-    console.log(password);
+
     if (typeof username === 'string') {
         usernameInput = username;
     }
+    if (typeof email === 'string') {
+        emailInput = email;
+    }
+
     // Enkel sjekk
     const validUsername =
         typeof username === 'string' && username.length >= 4 && username.length <= 31;
     const validPassword =
         typeof password === 'string' && password.length >= 6 && password.length <= 255;
-    if (validUsername && validPassword) {
+    if (validUsername && validPassword && isValidEmail(email)) {
         try {
             const user = await auth.createUser({
                 key: {
-                    providerId: 'username', // auth method
-                    providerUserId: username.toLowerCase(), // unique id when using "username" auth method
+                    providerId: 'email', // auth method
+                    providerUserId: email.toLowerCase(), // unique id when using "email" auth method
                     password, // hashed by Lucia
                 },
                 attributes: {
                     username,
+                    email: email.toLowerCase(),
+                    email_verified: Number(false),
                 },
             });
             const session = await auth.createSession({
                 userId: user.userId,
                 attributes: {},
             });
-            console.log(user.userId);
-            console.log(session);
             Astro.locals.auth.setSession(session); // set session cookie
-            return Astro.redirect('./', 302); // videresend til startsiden
+            const token = await generateEmailVerificationToken(user.userId);
+            await sendEmailVerificationLink(token);
+            return Astro.redirect('/bakrommet/epost-verifisering', 302); // videresend til startsiden
         } catch (e) {
-            console.log(e);
+            console.error(e);
             // denne delen er avhengig av server og SQL-dialekten
             if (e instanceof LibsqlError && e.code === 'SERVER_ERROR') {
-                console.error(e.code);
+                console.error(e);
                 errorMessage = e.code;
             }
             if (e instanceof LibsqlError && e.code === 'LIBSQL_CONSTRAINT_UNIQUE') {
@@ -67,18 +76,30 @@ if (Astro.request.method === 'POST') {
 
 const session = await Astro.locals.auth.validate();
 if (!session) return Astro.redirect('/bakrommet/login', 302);
+if (!session.user.emailVerified) {
+    return Astro.redirect('/bakrommet/epost-verifisering');
+}
 ---
 
 <BakromLayout title='Lag bruker'>
-    <main>
+    <main class='p-4 mx-auto max-w-2xl grid gap-8'>
         <h2>Opprett nye brukere</h2>
-        <form method='POST'>
+        <form method='POST' class='grid gap-2 px-3 py-4 md:px-4'>
             <label class='flex flex-col w-full' for='username'
                 >Brukernavn
                 <input
                     type='text'
                     name='username'
                     id='username'
+                    class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                /></label
+            >
+            <label class='flex flex-col w-full' for='email'
+                >Epost
+                <input
+                    type='email'
+                    name='email'
+                    id='email'
                     class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
                 /></label
             >
@@ -93,14 +114,12 @@ if (!session) return Astro.redirect('/bakrommet/login', 302);
             >
             <br />
             <input
-                name='Logg inn'
+                name='Opprett bruker'
                 type='submit'
-                value='Logg inn'
+                value='Opprett bruker'
                 class='py-2 rounded-sm bg-[#efb261] text-black text-secondary cursor-pointer hover:text-amber-100 hover:bg-yellow-900 md:w-1/2 md:justify-self-end'
             />
         </form>
         <p class='error'>{errorMessage}</p>
     </main>
 </BakromLayout>
-
- ---

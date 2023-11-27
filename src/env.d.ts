@@ -9,7 +9,9 @@ declare namespace App {
 declare namespace Lucia {
 	type Auth = import("./lib/lucia").Auth;
 	type DatabaseUserAttributes = {
-		username: string;	
+		username: string;
+		email: string;
+		email_verified: number;
 	};
 	type DatabaseSessionAttributes = {};
 }

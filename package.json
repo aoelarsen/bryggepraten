@@ -8,8 +8,10 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "dbgenerate": "drizzle-kit generate:sqlite --out ./drizzle/migrations --breakpoints --schema=./src/lib/tursoSchema.ts",
-    "dbpush": "drizzle-kit push:sqlite"
+    "dbgenerate-auth": "drizzle-kit generate:sqlite --out ./drizzle/migrations --breakpoints --schema=./src/lib/authSchema.ts",
+    "dbgenerate-content": "drizzle-kit generate:sqlite --out ./drizzle/migrations --breakpoints --schema=./src/lib/contentSchema.ts",
+    "dbpush-auth": "drizzle-kit push:sqlite --config=./drizzle.authconfig.ts",
+    "dbpush-content": "drizzle-kit push:sqlite --config=./drizzle.contentconfig.ts"
   },
   "dependencies": {
     "@astrojs/netlify": "^3.0.4",
