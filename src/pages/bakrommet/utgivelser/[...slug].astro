@@ -1,0 +1,17 @@
+---
+export const prerender = false;
+
+import BakromLayout from '../../../layouts/BakromLayout.astro';
+
+const { slug } = Astro.params;
+let title = slug || 'Utgivelse';
+
+const session = await Astro.locals.auth.validate();
+if (!session) return Astro.redirect('/bakrommet/login', 302);
+---
+
+<BakromLayout title={title}>
+    <main class='p-4 mx-auto max-w-2xl grid gap-8'>
+        <h2>{title}</h2>
+    </main>
+</BakromLayout>

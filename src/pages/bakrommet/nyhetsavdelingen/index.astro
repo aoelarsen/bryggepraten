@@ -1,0 +1,14 @@
+---
+export const prerender = false;
+import BakromLayout from '../../../layouts/BakromLayout.astro';
+
+const session = await Astro.locals.auth.validate();
+if (!session) return Astro.redirect('/bakrommet/login', 302);
+---
+
+<BakromLayout title='Nyhetsavdelingen'>
+    <main class='p-4 mx-auto max-w-2xl grid gap-8'>
+        <h2>Nyhetsavdelingen</h2>
+        <p>Her kommer mulighet for å legge til og oppdatere nyheter.</p>
+    </main>
+</BakromLayout>

@@ -4,11 +4,10 @@ dotenv.config();
 
 export default {
   schema: "./src/lib/authSchema.ts",
-  out: "./drizzle",
+  out: "./drizzle/auth",
   driver: "turso",
   dbCredentials: {
     url: process.env.BRYGGA_AUTH_DB_URL || 'https://turso.app',
-    authToken: process.env.BRYGGA_AUTH_DB_TOKEN,
-    
+    authToken: process.env.BRYGGA_AUTH_DB_TOKEN
   }
 } satisfies Config;

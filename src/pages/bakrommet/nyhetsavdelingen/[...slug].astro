@@ -1,0 +1,17 @@
+---
+export const prerender = false;
+
+import BakromLayout from '../../../layouts/BakromLayout.astro';
+
+const { slug } = Astro.params;
+let title = slug || 'Nyhet';
+
+const session = await Astro.locals.auth.validate();
+if (!session) return Astro.redirect('/bakrommet/login', 302);
+---
+
+<BakromLayout title={title}>
+    <main>
+        <h2>{title}</h2>
+    </main>
+</BakromLayout>

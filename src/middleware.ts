@@ -1,8 +1,8 @@
 import { auth } from "./lib/lucia.ts";
 
-import type { MiddlewareResponseHandler } from "astro";
+import type { MiddlewareHandler } from "astro";
 
-export const onRequest: MiddlewareResponseHandler = async (context, next) => {
+export const onRequest: MiddlewareHandler = async (context, next) => {
 	context.locals.auth = auth.handleRequest(context);
 	return await next();
 };

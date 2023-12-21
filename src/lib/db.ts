@@ -11,4 +11,6 @@ export const bryggaInnholdClient = createClient({
   authToken: import.meta.env.BRYGGA_INNHOLD_DB_TOKEN,
 });
 
+
 export const db = drizzle(bryggaAuthClient);
+export const contentDb = drizzle(bryggaInnholdClient)

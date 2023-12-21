@@ -1,0 +1,207 @@
+---
+import type { Author } from '../../lib/contentSchema';
+
+const { forfatterListe } = Astro.props;
+// console.log(forfatterListe);
+---
+
+<section>
+    <h3 class='font-bold'>Forfattere</h3>
+    <table class='border-collapse'>
+        <thead>
+            <tr>
+                <th class='text-center border border-slate-600 p-1'>ID#</th>
+                <th class='border border-slate-600 p-1'>Navn</th>
+                <th class='border border-slate-600 p-1'>Epost</th>
+                <th class='border border-slate-600 p-1'>Rediger</th>
+                <th class='border border-slate-600 p-1'>Slett</th>
+            </tr>
+        </thead>
+        <tbody>
+            {
+                forfatterListe
+                    ? forfatterListe.map((forfatter: Author) => {
+                          return (
+                              <tr
+                                  id={forfatter.id.toString()}
+                                  data-forfatternavn={forfatter.name}
+                                  data-forfatterepost={forfatter.email}
+                              >
+                                  <td class='text-center border border-slate-600 p-1'>
+                                      {forfatter.id}
+                                  </td>
+                                  <td class='border border-slate-600 p-1'>{forfatter.name}</td>
+                                  <td class='border border-slate-600 p-1'>{forfatter.email}</td>
+                                  <td class='border border-slate-600 p-1'>
+                                      <button class='forfatterValgBtn p-2 rounded-sm bg-[#efb261] text-black cursor-pointer hover:text-amber-100 hover:bg-yellow-900 w-full'>
+                                          Rediger
+                                      </button>
+                                  </td>
+                                  <td class='border border-slate-600 p-1'>
+                                      <button class='forfatterSlettBtn p-2 w-full rounded-sm border bg-red-200 border-red-600 text-black text-secondary cursor-pointer hover:text-white hover:bg-red-900'>
+                                          Slett
+                                      </button>
+                                  </td>
+                              </tr>
+                          );
+                      })
+                    : null
+            }
+        </tbody>
+    </table>
+
+    <!-- Edit dialog -->
+    <dialog
+        id='edit-author-dialog'
+        class='p-6 rounded-md w-full md:w-1/2 open:grid open:grid-flow-rows open:gap-4 backdrop:bg-yellow-400 backdrop:opacity-50'
+    >
+        <h3 class='font-bold'>Rediger forfatter</h3>
+        <form id='edit-author-form' method='POST' class='w-full'>
+            <label for='forfatter-navn' class='block'>Navn</label>
+            <input type='hidden' name='forfatter-id' id='forfatter-id' value='' />
+            <input
+                type='text'
+                name='forfatter-navn'
+                id='forfatter-navn'
+                class='w-full p-2 border border-slate-600 rounded-sm'
+            />
+            <label for='forfatter-epost' class='block'>Epost</label>
+            <input
+                type='email'
+                name='forfatter-epost'
+                id='forfatter-epost'
+                class='w-full p-2 border border-slate-600 rounded-sm'
+            />
+            <input
+                type='submit'
+                value='Oppdater forfatter'
+                class='p-2 w-full rounded-sm border bg-green-200 border-green-600 text-black text-secondary cursor-pointer hover:text-white hover:bg-green-900'
+                form='edit-author-form'
+            />
+        </form>
+        <button
+            class='p-2 w-full rounded-sm border bg-gray-200 border-gray-600 text-black text-secondary cursor-pointer hover:text-white hover:bg-gray-900'
+            id='cancel-edit'>Avbryt</button
+        >
+    </dialog>
+
+    <!-- Delete dialog -->
+    <dialog
+        id='confirm-delete'
+        class='p-6 rounded-md open:grid open:grid-flow-rows open:gap-4 backdrop:bg-red-400 backdrop:opacity-50'
+    >
+        <h3 class='font-bold'>Slett forfatter</h3>
+        <p>Er du sikker på at du vil slette <span id='confirm-dialog-author-name'></span></p>
+        <form method='POST' class='w-full' id='confirm-delete-form'>
+            <input
+                type='submit'
+                value='Slett'
+                class='p-2 w-full rounded-sm border bg-red-200 border-red-600 text-black text-secondary cursor-pointer hover:text-white hover:bg-red-900'
+                form='confirm-delete-form'
+            />
+        </form>
+        <button
+            class='p-2 w-full rounded-sm border bg-gray-200 border-gray-600 text-black text-secondary cursor-pointer hover:text-white hover:bg-gray-900'
+            id='cancel-delete'
+            autofocus
+        >
+            Avbryt
+        </button>
+    </dialog>
+
+    <p>Valgt forfatter: <span id='valgtForfatterDisplay' class='text-bold'></span></p>
+    <p id='errorMessage'></p>
+</section>
+
+<script>
+    const forfatterEditBtns = document.querySelectorAll('.forfatterValgBtn');
+    const forfatterSlettBtns = document.querySelectorAll('.forfatterSlettBtn');
+    const editDialog = document.getElementById('edit-author-dialog') as HTMLDialogElement;
+    const cancelEditBtn = document.getElementById('cancel-edit') as HTMLButtonElement;
+    const deleteDialog = document.getElementById('confirm-delete') as HTMLDialogElement;
+    const cancelDeleteBtn = document.getElementById('cancel-delete') as HTMLButtonElement;
+
+    const conFirmDialogAuthor = document.getElementById(
+        'confirm-dialog-author-name'
+    ) as HTMLSpanElement;
+    const confirmDeleteForm = document.getElementById('confirm-delete-form') as HTMLFormElement;
+    const valgtForfatterDisplay = document.getElementById(
+        'valgtForfatterDisplay'
+    ) as HTMLSpanElement;
+
+    if (cancelEditBtn) {
+        cancelEditBtn.addEventListener('click', () => {
+            editDialog && editDialog.close();
+        });
+    }
+
+    if (cancelDeleteBtn) {
+        cancelDeleteBtn.addEventListener('click', () => {
+            deleteDialog && deleteDialog.close();
+        });
+    }
+
+    // Edit dialog
+    forfatterEditBtns.forEach((btn) => {
+        btn.addEventListener('click', (e: Event) => {
+            const forfatterId = (e.target as HTMLElement).parentElement?.parentElement?.id;
+            let forfatterNavn = (e.target as HTMLElement).parentElement?.parentElement?.dataset
+                .forfatternavn;
+            let forfatterEpost = (e.target as HTMLElement).parentElement?.parentElement?.dataset
+                .forfatterepost;
+
+            const forfatterIdInput = document.getElementById('forfatter-id') as HTMLInputElement;
+            const forfatterNavnInput = document.getElementById(
+                'forfatter-navn'
+            ) as HTMLInputElement;
+            const forfatterEpostInput = document.getElementById(
+                'forfatter-epost'
+            ) as HTMLInputElement;
+
+            const editForm = document.getElementById('edit-author-form') as HTMLFormElement;
+            forfatterIdInput.value = forfatterId || '';
+            forfatterNavnInput.value = forfatterNavn || '';
+            forfatterEpostInput.value = forfatterEpost || '';
+
+            editForm.addEventListener('submit', (e: Event) => {
+                e.preventDefault();
+                forfatterNavn = forfatterNavnInput.value;
+                forfatterEpost = forfatterEpostInput.value;
+                editForm.action = `/bakrommet/forfattere/rediger-forfatter/${forfatterId}?forfatterNavn=${forfatterNavn}&forfatterEpost=${forfatterEpost}`;
+                editForm.submit();
+            });
+
+            if (editDialog) editDialog.showModal();
+        });
+    });
+
+    // Delete dialog
+    forfatterSlettBtns.forEach((btn) => {
+        btn.addEventListener('click', (e: Event) => {
+            const forfatterId = (e.target as HTMLElement).parentElement?.parentElement?.id;
+            const forfatterNavn = (e.target as HTMLElement).parentElement?.parentElement?.dataset
+                .forfatternavn;
+
+            if (conFirmDialogAuthor && forfatterNavn && valgtForfatterDisplay) {
+                conFirmDialogAuthor.innerText = forfatterNavn;
+                valgtForfatterDisplay.innerText = forfatterNavn;
+            }
+
+            if (confirmDeleteForm && forfatterId && forfatterNavn) {
+                confirmDeleteForm.action = `/bakrommet/forfattere/slett-forfatter/${forfatterId}`;
+            }
+            if (deleteDialog) deleteDialog.showModal();
+        });
+    });
+</script>
+
+<!-- <form
+action={`/bakrommet/forfattere/${forfatter.name}?forfatterId=${forfatter.id}&forfatterNavn=${forfatter.name}&forfatterEpost=${forfatter.email}`}
+method='POST'
+>
+<input
+    type='submit'
+    value='Rediger'
+    class='forfatterValgBtn p-2 rounded-sm bg-[#efb261] text-black cursor-pointer hover:text-amber-100 hover:bg-yellow-900 w-full'
+/>
+</form> -->

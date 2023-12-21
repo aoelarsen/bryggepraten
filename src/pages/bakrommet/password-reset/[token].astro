@@ -5,7 +5,7 @@ import BakromLayout from '../../../layouts/BakromLayout.astro';
 import { auth } from '../../../lib/lucia';
 import { validatePasswordResetToken } from '../../../lib/token';
 
-let errorMessage = '';
+let errorMessage: unknown = '';
 
 if (Astro.request.method === 'POST') {
     const formData = await Astro.request.formData();
@@ -16,21 +16,19 @@ if (Astro.request.method === 'POST') {
     if (validatePassword) {
         try {
             const { token } = Astro.params;
-            console.log('----> token fra passordnullstilling-token', token);
+
             if (!token) {
                 return new Response(null, { status: 400 });
             }
             const userId = await validatePasswordResetToken(token);
-            console.log('----> userId fra passordnullstilling-token', userId);
+
             let user = await auth.getUser(userId);
-            console.log('----> user fra passordnullstilling-token', user);
-            console.log('----> user.userId fra passordnullstilling-token', user.userId);
-            console.log('----> user.email fra passordnullstilling-token', user.email);
 
             await auth.invalidateAllUserSessions(user.userId);
             try {
                 await auth.updateKeyPassword('email', user.email, password);
             } catch (e) {
+                errorMessage = e;
                 console.error(e);
             }
 
@@ -47,7 +45,7 @@ if (Astro.request.method === 'POST') {
             return Astro.redirect('/bakrommet');
         } catch (e) {
             console.error(e);
-            errorMessage = 'Feil eller utløpt passordlink';
+            errorMessage = `Feil eller utløpt passordlink. Error: ${e}`;
             Astro.response.status = 400;
         }
     } else {

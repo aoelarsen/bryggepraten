@@ -1,0 +1,89 @@
+---
+export const prerender = false;
+import BakromLayout from '../../../layouts/BakromLayout.astro';
+import ForfatterListe from '../../../components/bakromComponents/ForfatterListe.astro';
+import { contentDb } from '../../../lib/db';
+import { authors } from '../../../lib/contentSchema';
+import type { InsertAuthor } from '../../../lib/contentSchema';
+import { isValidEmail } from '../../../lib/email';
+
+const session = await Astro.locals.auth.validate();
+if (!session) return Astro.redirect('/bakrommet/login', 302);
+
+const authorList = await contentDb.select().from(authors);
+let errorMessage: unknown = '';
+let successMessage = '';
+
+if (Astro.request.method === 'POST') {
+    const formData = await Astro.request.formData();
+    const authorName = formData.get('authorName');
+    const email = formData.get('email');
+
+    const validAurhorName =
+        typeof authorName === 'string' && authorName.length >= 4 && authorName.length <= 31;
+
+    if (validAurhorName && isValidEmail(email)) {
+        try {
+            const newAuthor: InsertAuthor = {
+                name: authorName,
+                email: email,
+            };
+            const insertAuthor = await contentDb
+                .insert(authors)
+                .values(newAuthor)
+                .returning({ insertedName: authors.name });
+
+            if (insertAuthor) {
+                console.log('insertedAuthor: ', insertAuthor);
+                successMessage = `"${insertAuthor[0].insertedName}" ble lagt til`;
+                Astro.redirect('/bakrommet/forfattere', 302);
+            } else {
+                errorMessage = 'Noe gikk galt';
+                console.error(insertAuthor);
+            }
+        } catch (error) {
+            errorMessage = error;
+            console.error(error);
+        }
+    }
+}
+---
+
+<BakromLayout title='Forfatterskjema'>
+    <main class='p-4 mx-auto max-w-2xl grid gap-8'>
+        <h2>Forfattere</h2>
+        <ForfatterListe forfatterListe={authorList} />
+        <section>
+            <h3 class='font-bold'>Legg til forfatter</h3>
+            <form method='POST'>
+                <label class='flex flex-col w-full' for='authorName'
+                    >Navn
+                    <input
+                        type='text'
+                        id='authorName'
+                        name='authorName'
+                        required
+                        class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                    />
+                </label>
+                <label class='flex flex-col w-full' for='email'
+                    >E-post
+                    <input
+                        type='email'
+                        id='email'
+                        name='email'
+                        required
+                        class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                    />
+                </label>
+                <br />
+                <input
+                    type='submit'
+                    value='Opprett forfatter'
+                    class='p-2 rounded-sm bg-[#efb261] text-black text-secondary cursor-pointer hover:text-amber-100 hover:bg-yellow-900 md:justify-self-end'
+                />
+            </form>
+            <p>{errorMessage ? errorMessage : successMessage}</p>
+        </section>
+    </main>
+</BakromLayout>

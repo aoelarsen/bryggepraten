@@ -1,0 +1,107 @@
+---
+export const prerender = false;
+import BakromLayout from '../../../layouts/BakromLayout.astro';
+import ForfatterSkjema from '../forfattere/index.astro';
+import { contentDb } from '../../../lib/db';
+import { authors } from '../../../lib/contentSchema';
+
+const forfattere = await contentDb.select().from(authors).all();
+console.log(forfattere);
+
+if (Astro.request.method === 'POST') {
+    const formData = await Astro.request.formData();
+    const title = formData.get('title');
+    const genre = formData.get('genre');
+    const authors = formData.get('authors');
+    const publishDate = formData.get('publishDate');
+    const price = formData.get('price');
+    const status = formData.get('status');
+
+    console.log(title, genre, authors, publishDate, price, status);
+}
+
+const session = await Astro.locals.auth.validate();
+if (!session) return Astro.redirect('/bakrommet/login', 302);
+---
+
+<BakromLayout title='Utgivelser'>
+    <main class='p-4 mx-auto max-w-2xl grid gap-8'>
+        <h2>Utgivelser</h2>
+
+        <section>
+            <p>Liste over utgivelser kommer her</p>
+        </section>
+        <section>
+            <h3>Legg til ny utgivelse</h3>
+            <form method='POST'>
+                <label class='flex flex-col w-full' for='title'
+                    >Tittel
+                    <input
+                        type='text'
+                        id='title'
+                        name='title'
+                        class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                    /></label
+                >
+                <label class='flex flex-col w-full' for='genre'
+                    >Sjanger
+                    <input
+                        type='text'
+                        id='genre'
+                        name='genre'
+                        class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                    /></label
+                >
+                <label class='flex flex-col w-full' for='authors'
+                    >Forfatter(e)
+                    <select
+                        id='authors'
+                        name='authors'
+                        multiple
+                        class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                    >
+                        <option value='Bryggepraterne' class='bg-white'>Velg forfatter</option>
+                        <!-- {{ forfattere.map((forfatter) => ( <option value={forfatter.id}>{forfatter.name}</option> )) }} -->
+                    </select>
+                </label>
+                <label class='flex flex-col w-full' for='date'
+                    >Utgivelsesdato
+                    <input
+                        type='date'
+                        id='date'
+                        name='date'
+                        class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                    /></label
+                >
+                <label class='flex flex-col w-full' for='price'
+                    >Pris
+                    <input
+                        type='number'
+                        id='price'
+                        name='price'
+                        class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                    />
+                </label>
+                <label class='flex flex-col w-full' for='status'>
+                    Status
+                    <select
+                        name='status'
+                        id='status'
+                        class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                    >
+                        <option value='tilgjengelig' class='bg-white'>Tilgjengelig</option>
+                        <option value='snart_tomt' class='bg-white'>Snart tomt</option>
+                        <option value='utsolgt' class='bg-white'>Utsolgt</option>
+                    </select>
+                </label>
+                <br />
+                <input
+                    type='submit'
+                    class='py-2 rounded-sm bg-[#efb261] text-black text-secondary cursor-pointer hover:text-amber-100 hover:bg-yellow-900 md:w-1/2 md:justify-self-end'
+                    value='Legg til'
+                />
+            </form>
+        </section>
+        <ForfatterSkjema />
+    </main>
+</BakromLayout>

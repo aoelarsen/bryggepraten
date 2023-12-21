@@ -1,5 +1,5 @@
 ---
-interface bok {
+interface Bok {
     tittel: string;
     sjanger?: string;
     forfattere: [];
@@ -31,7 +31,7 @@ const andre = utgivelser.utgivelser.andre_forfattere;
         </p>
         <fieldset class='w-full flex flex-col justify-between gap-2'>
             {
-                bryggeprat.map((bok: bok) => {
+                bryggeprat.map((bok: Bok) => {
                     const name = bok.tittel.toLowerCase();
                     return (
                         <label class='mt-3 w-full flex flex-col md:flex-row justify-between'>

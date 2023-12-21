@@ -4,6 +4,7 @@ export interface Props {
 }
 
 const { title } = Astro.props;
+import { ViewTransitions } from 'astro:transitions';
 import AdminHeader from '../components/AdminHeader.astro';
 import Footer from '../components/Footer.astro';
 ---
@@ -19,6 +20,7 @@ import Footer from '../components/Footer.astro';
         <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
         <link rel='manifest' href='/site.webmanifest' />
         <meta name='generator' content={Astro.generator} />
+        <ViewTransitions />
         <title>{title}</title>
     </head>
     <body
@@ -31,39 +33,38 @@ import Footer from '../components/Footer.astro';
             <slot />
             <Footer />
         </div>
-    </body>
+    </body><style is:global>
+        :root {
+            --accent: 124, 58, 237;
+            --accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
+        }
+        html {
+            font-family: system-ui, sans-serif;
+            background-color: #f6f6f6;
+        }
+        code {
+            font-family:
+                Menlo,
+                Monaco,
+                Lucida Console,
+                Liberation Mono,
+                DejaVu Sans Mono,
+                Bitstream Vera Sans Mono,
+                Courier New,
+                monospace;
+        }
+        h2 {
+            font-size: 1.5rem;
+            padding-top: 1rem;
+            padding-bottom: 1.5rem;
+        }
+        p {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        .front-wrap {
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+        }
+    </style>
 </html>
-<style is:global>
-    :root {
-        --accent: 124, 58, 237;
-        --accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-    }
-    html {
-        font-family: system-ui, sans-serif;
-        background-color: #f6f6f6;
-    }
-    code {
-        font-family:
-            Menlo,
-            Monaco,
-            Lucida Console,
-            Liberation Mono,
-            DejaVu Sans Mono,
-            Bitstream Vera Sans Mono,
-            Courier New,
-            monospace;
-    }
-    h2 {
-        font-size: 1.5rem;
-        padding-top: 1rem;
-        padding-bottom: 1.5rem;
-    }
-    p {
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-    }
-    .front-wrap {
-        display: grid;
-        grid-template-rows: auto 1fr auto;
-    }
-</style>
