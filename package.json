@@ -14,7 +14,7 @@
     "dbpush-content": "drizzle-kit push:sqlite --config=./drizzle.contentconfig.ts"
   },
   "dependencies": {
-    "@astrojs/netlify": "^3.1.1",
+    "@astrojs/netlify": "^4.0.1",
     "@astrojs/preact": "^3.0.1",
     "@astrojs/tailwind": "^5.0.3",
     "@libsql/client": "^0.3.6",
