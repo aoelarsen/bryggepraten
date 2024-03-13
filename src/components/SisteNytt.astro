@@ -1,13 +1,97 @@
 ---
 import { Image } from 'astro:assets';
 
-import biografien from '../images/presse/biografien_over_davidsen.png';
+// import biografien from '../images/presse/biografien_over_davidsen.png';
+import utstilling from '../images/presse/utstilling1.jpg';
 ---
 
 <section class='border border-dotted border-[#efb261] rounded-sm w-full'>
     <h4 class='p-2 text-sm bg-[#efb261] font-bold'>Siste nytt fra forlaget</h4>
     <article class='p-2 m-2'>
-        <h2 class='text-center'>Bryggepraten i Avisa</h2>
+        <h2 class='text-center'>Bryggepratkunsten erobrer Spania</h2>
+        <figure>
+            <Image
+                src={utstilling}
+                alt='To menn sittende i en bilde garasje som fungerer som et galleri der det henger bilder på veggene.'
+                loading='lazy'
+            />
+        </figure>
+        <p class='font-semibold'>
+            Det har i lengre tid vært vanskelig å oppnå kontakt med vår gode samarbeidspartner RUTH
+            SJEBANE (Jfr. vår siste utgivelse «Underveis kan du late som du flyr»). Nå har Sjebane
+            imidlertid henvendt seg til forlaget med spørsmål om hun kan få intervjue oss i forkant
+            av vårens store Bryggeprat-utstilling i Spania. Tatt i betraktning at Sandefjords Blad
+            heller ikke denne gang ønsket å bruke spalteplass på oss, var det selvsagt umulig å
+            avslå et slikt raust tilbud. Her kommer intervjuet:
+        </p>
+        <h3 class='font-bold pt-2'>BRYGGEPRATKUNSTEN EROBRER SPANIA</h3>
+        <p class='leading-tight'>Av Ruth Sjebane</p>
+        <p>
+            Høsten 2020 ble det arrangert en kunstutstilling i Sandefjord, der «Bryggepraten»
+            (Birger Dyve Larsen og Jørund Holst-Hansen) viste sine lett tiltuklede versjoner av
+            kjente verk fra verdenskunsten. Nå har dessverre Sandefjords Blads lesere vært nødt til
+            å savne Bryggepraten i avisens spalter etter at de ble svartelistet sommeren 2020.
+            Likevel er «Bryggepraten» slett ikke død: Samtalene mellom «Hansen og Larsen» lever
+            videre på Facebook med ukentlige tekster og tegninger, og dessuten flere nye
+            bokutgivelser fra Bryggekanten forlag. Nå er også billedkunsten deres på vei ut i
+            verden! Det har nemlig vært flere forespørsler om å vise bildene, og de to forfatterne
+            har akseptert en invitasjon fra «La Domadora y el Leon» i den andalusiske byen
+            Frigiliana. Her skal utvalgte verker stilles ut fra og med mars 2024.
+        </p>
+        <dl class='grid grid-cols-[auto,1fr] gap-2 py-4'>
+            <dt class='mr-6'>RS</dt>
+            <dd>Kunstutstilling i Spania? Hvordan kom dette i stand?</dd>
+            <dt class='mr-6'>L</dt>
+            <dd>
+                Vi har jo fått noen forespørsler tidligere, men på grunn av andre presserende
+                oppgaver som «pratær og sånn», har vi ikke sett oss i stand til å realisere dette
+                før nå.
+            </dd>
+            <dt class='mr-6'>H</dt>
+            <dd>
+                Dessuten var vår kurator, Juan Tárrega, for øvrig etterkommer etter den kjente
+                komponisten, svært opptatt med andre oppgaver i tiden etter pandemien.
+            </dd>
+            <dt class='mr-6'>RS</dt>
+            <dd>
+                Noen vil vel si at bildene deres har en litt særegen form for humor. Tror dere at
+                spanjolene vil forstå uttrykket deres?
+            </dd>
+            <dt class='mr-6'>L</dt>
+            <dd>
+                Nå har vi prioritert versjonene våre av internasjonalt kjente motiver og kunstnere,
+                så det skal ikke være noe problem. Galleristyreren ser i alle fall ikke at det
+                spanske publikum skal ha noen vanskeligheter med å forstå bildene.
+            </dd>
+            <dt class='mr-6'>H</dt>
+            <dd>
+                Dessuten kan alle noe om selfies i dag. Dette er Bryggepratens selfies i kunsten. Og
+                vi får vist fram disse bildene for et publikum et meget vidsynt publikum.
+            </dd>
+            <dt class='mr-6'>RS</dt>
+            <dd>
+                Så dette vil stort sett være bilder av samme type som dere viste i Sandefjord i
+                2020?
+            </dd>
+            <dt class='mr-6'>H</dt>
+            <dd>
+                Vi stiller også ut en rekke av Larsens skisser fra gatelivet i en spansk småby. Her
+                er det nok mange som vil kjenne igjen både typer og stemninger.
+            </dd>
+            <dt class='mr-6'>RS</dt><dd>
+                Kan vi regne med nye utstillinger her hjemme etter hvert?
+            </dd>
+            <dt class='mr-6'>L</dt><dd>
+                Der er ikke noe bestemt ennå. Vi har for tiden noen andre prosjekter som vi må
+                fullføre, så får vi se.
+            </dd>
+        </dl>
+        <p class='font-semibold'>
+            Utstillingen åpner i Frigiliana, Calle Rosario Joaquín, neste uke. Følg med her for
+            oppdatert informasjon, og stikk gjerne innom galleriet!
+        </p>
+    </article>
+    <!-- <h2 class='text-center'>Bryggepraten i Avisa</h2>
         <figure>
             <Image
                 src={biografien}
@@ -15,6 +99,5 @@ import biografien from '../images/presse/biografien_over_davidsen.png';
                 loading='lazy'
             />
             <figcaption>Da er den nye boka omtalt</figcaption>
-        </figure>
-    </article>
+        </figure> -->
 </section>
