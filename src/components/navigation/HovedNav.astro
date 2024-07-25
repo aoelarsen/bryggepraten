@@ -227,21 +227,23 @@ const currentPath = pathname.slice(1);
 </nav>
 
 <script is:inline>
-    const openMenuIcon = document.getElementById('openMenuIcon');
-    const closedMenuIcon = document.getElementById('closedMenuIcon');
-    const menuItems = document.getElementById('mobileMenu');
+    document.addEventListener('astro:page-load', () => {
+        const openMenuIcon = document.getElementById('openMenuIcon');
+        const closedMenuIcon = document.getElementById('closedMenuIcon');
+        const menuItems = document.getElementById('mobileMenu');
 
-    const handleNav = () => {
-        openMenuIcon.classList.contains('block')
-            ? openMenuIcon.classList.replace('block', 'hidden')
-            : openMenuIcon.classList.replace('hidden', 'block');
-        closedMenuIcon.classList.contains('block')
-            ? closedMenuIcon.classList.replace('block', 'hidden')
-            : closedMenuIcon.classList.replace('hidden', 'block');
-        menuItems.classList.contains('hidden')
-            ? menuItems.classList.replace('hidden', 'block')
-            : menuItems.classList.replace('block', 'hidden');
-    };
+        const handleNav = () => {
+            openMenuIcon.classList.contains('block')
+                ? openMenuIcon.classList.replace('block', 'hidden')
+                : openMenuIcon.classList.replace('hidden', 'block');
+            closedMenuIcon.classList.contains('block')
+                ? closedMenuIcon.classList.replace('block', 'hidden')
+                : closedMenuIcon.classList.replace('hidden', 'block');
+            menuItems.classList.contains('hidden')
+                ? menuItems.classList.replace('hidden', 'block')
+                : menuItems.classList.replace('block', 'hidden');
+        };
 
-    document.getElementById('navButton').addEventListener('click', handleNav);
+        document.getElementById('navButton').addEventListener('click', handleNav);
+    });
 </script>
