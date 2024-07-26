@@ -153,13 +153,15 @@ const currentPath = pathname.slice(1);
 </div>
 
 <script is:inline>
-const dropBtn = document.getElementById('utgivelserBtn');
-const dropMenu = document.getElementById('utgivelserMenu');
+    document.addEventListener('astro:page-load', () => {
+        const dropBtn = document.getElementById('utgivelserBtn');
+        const dropMenu = document.getElementById('utgivelserMenu');
 
-const handleDropDown = () => {
-    dropMenu.classList.contains('hidden')
-        ? dropMenu.classList.replace('hidden', 'block')
-        : dropMenu.classList.replace('block', 'hidden');
-};
-dropBtn.addEventListener('click', handleDropDown);
+        const handleDropDown = () => {
+            dropMenu.classList.contains('hidden')
+                ? dropMenu.classList.replace('hidden', 'block')
+                : dropMenu.classList.replace('block', 'hidden');
+        };
+        dropBtn.addEventListener('click', handleDropDown);
+    });
 </script>
