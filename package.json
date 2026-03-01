@@ -14,13 +14,12 @@
     "dbpush-content": "drizzle-kit push:sqlite --config=./drizzle.contentconfig.ts"
   },
   "dependencies": {
-    "@astrojs/netlify": "^4.0.1",
-    "@astrojs/preact": "^3.0.1",
-    "@astrojs/tailwind": "^5.0.3",
+    "@astrojs/netlify": "^6.6.4",
+    "@astrojs/preact": "^4.1.3",
+    "@astrojs/tailwind": "^6.0.2",
     "@libsql/client": "^0.3.6",
     "@lucia-auth/adapter-sqlite": "^2.0.1",
-    "astro": "^4.0.4",
-    "better-sqlite3": "^9.0.0",
+    "astro": "^5.18.0",
     "dotenv": "^16.3.1",
     "drizzle-orm": "^0.28.6",
     "lucia": "^2.7.3",
