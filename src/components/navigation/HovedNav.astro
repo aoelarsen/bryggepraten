@@ -10,7 +10,7 @@ const currentPath = pathname.slice(1);
                 <!-- Mobile menu button-->
                 <button
                     type='button'
-                    class='inline-flex items-center justify-center rounded-sm p-2 text-gray-600 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white'
+                    class='inline-flex items-center justify-center rounded-xs p-2 text-gray-600 hover:bg-gray-800 hover:text-white focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-white'
                     aria-controls='mobile-menu'
                     aria-expanded='false'
                     id='navButton'
@@ -68,7 +68,7 @@ const currentPath = pathname.slice(1);
                             currentPath === '' ? (
                                 <a
                                     href='/'
-                                    class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                                    class='bg-gray-900 text-white px-3 py-2 rounded-xs text-sm font-medium active:text-white'
                                     aria-current='page'
                                 >
                                     Hjem
@@ -76,7 +76,7 @@ const currentPath = pathname.slice(1);
                             ) : (
                                 <a
                                     href='/'
-                                    class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                                    class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-xs text-sm font-medium active:text-white'
                                 >
                                     Hjem
                                 </a>
@@ -87,7 +87,7 @@ const currentPath = pathname.slice(1);
                             currentPath === 'om-bryggepraten' ? (
                                 <a
                                     href='/om-bryggepraten'
-                                    class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                                    class='bg-gray-900 text-white px-3 py-2 rounded-xs text-sm font-medium active:text-white'
                                     aria-current='page'
                                 >
                                     Om Bryggepraten
@@ -95,7 +95,7 @@ const currentPath = pathname.slice(1);
                             ) : (
                                 <a
                                     href='/om-bryggepraten'
-                                    class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                                    class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-xs text-sm font-medium active:text-white'
                                 >
                                     Om Bryggepraten
                                 </a>
@@ -105,7 +105,7 @@ const currentPath = pathname.slice(1);
                             currentPath === 'kontakt-oss' ? (
                                 <a
                                     href='/kontakt-oss'
-                                    class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                                    class='bg-gray-900 text-white px-3 py-2 rounded-xs text-sm font-medium active:text-white'
                                     aria-current='page'
                                 >
                                     Kontakt Oss
@@ -113,7 +113,7 @@ const currentPath = pathname.slice(1);
                             ) : (
                                 <a
                                     href='/kontakt-oss'
-                                    class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                                    class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-xs text-sm font-medium active:text-white'
                                 >
                                     Kontakt Oss
                                 </a>
@@ -123,7 +123,7 @@ const currentPath = pathname.slice(1);
                             currentPath === 'ruth-sjebane' ? (
                                 <a
                                     href='/ruth-sjebane'
-                                    class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                                    class='bg-gray-900 text-white px-3 py-2 rounded-xs text-sm font-medium active:text-white'
                                     aria-current='page'
                                 >
                                     Ruth Sjebane
@@ -131,7 +131,7 @@ const currentPath = pathname.slice(1);
                             ) : (
                                 <a
                                     href='/ruth-sjebane'
-                                    class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                                    class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-xs text-sm font-medium active:text-white'
                                 >
                                     Ruth Sjebane
                                 </a>
@@ -147,13 +147,13 @@ const currentPath = pathname.slice(1);
 
     <div class='hidden relative h-min lg:hidden' id='mobileMenu'>
         <div
-            class='absolute right-[-0.5vw] w-[95vw] md:w-[50vw] h-min flex flex-col gap-2 rounded-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none-1 px-2 pt-2 pb-3 border-blue-800'
+            class='absolute right-[-0.5vw] w-[95vw] md:w-[50vw] h-min flex flex-col gap-2 rounded-xs bg-white shadow-lg ring-1 ring-black/5 focus:outline-none-1 px-2 pt-2 pb-3 border-blue-800'
         >
             {
                 currentPath === '' ? (
                     <a
                         href='/'
-                        class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-xs text-sm font-medium active:text-white'
                         aria-current='page'
                     >
                         Hjem
@@ -161,7 +161,7 @@ const currentPath = pathname.slice(1);
                 ) : (
                     <a
                         href='/'
-                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-xs text-sm font-medium active:text-white'
                     >
                         Hjem
                     </a>
@@ -172,7 +172,7 @@ const currentPath = pathname.slice(1);
                 currentPath === 'om-bryggepraten' ? (
                     <a
                         href='/om-bryggepraten'
-                        class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-xs text-sm font-medium active:text-white'
                         aria-current='page'
                     >
                         Om Bryggepraten
@@ -180,7 +180,7 @@ const currentPath = pathname.slice(1);
                 ) : (
                     <a
                         href='/om-bryggepraten'
-                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-xs text-sm font-medium active:text-white'
                     >
                         Om Bryggepraten
                     </a>
@@ -190,7 +190,7 @@ const currentPath = pathname.slice(1);
                 currentPath === 'kontakt-oss' ? (
                     <a
                         href='/kontakt-oss'
-                        class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-xs text-sm font-medium active:text-white'
                         aria-current='page'
                     >
                         Kontakt Oss
@@ -198,7 +198,7 @@ const currentPath = pathname.slice(1);
                 ) : (
                     <a
                         href='/kontakt-oss'
-                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-xs text-sm font-medium active:text-white'
                     >
                         Kontakt Oss
                     </a>
@@ -208,7 +208,7 @@ const currentPath = pathname.slice(1);
                 currentPath === 'ruth-sjebane' ? (
                     <a
                         href='/ruth-sjebane'
-                        class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-xs text-sm font-medium active:text-white'
                         aria-current='page'
                     >
                         Ruth Sjebane
@@ -216,7 +216,7 @@ const currentPath = pathname.slice(1);
                 ) : (
                     <a
                         href='/ruth-sjebane'
-                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium active:text-white'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-xs text-sm font-medium active:text-white'
                     >
                         Ruth Sjebane
                     </a>

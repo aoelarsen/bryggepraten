@@ -4,9 +4,10 @@ export interface Props {
 }
 
 const { title } = Astro.props;
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import '../styles/global.css';
 ---
 
 <!doctype html>
@@ -19,7 +20,7 @@ import Footer from '../components/Footer.astro';
         <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
         <link rel='manifest' href='/site.webmanifest' />
         <meta name='generator' content={Astro.generator} />
-        <ViewTransitions />
+        <ClientRouter />
         <title>{title}</title>
     </head>
     <body

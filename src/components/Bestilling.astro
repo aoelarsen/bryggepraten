@@ -2,9 +2,9 @@
 interface Bok {
     tittel: string;
     sjanger?: string;
-    forfattere: [];
-    utgivelsesdato?: Date;
-    pris?: number;
+    forfattere: string[];
+    utgivelsesdato?: string;
+    pris?: string;
     status?: string;
 }
 
@@ -41,7 +41,7 @@ const andre = utgivelser.utgivelser.andre_forfattere;
                                 type='number'
                                 max='10'
                                 placeholder='0'
-                                class='p-2 w-1/4 grow-0 self-end rounded-sm text-primary text-center border invalid:border-rose-500 valid:border-green-600'
+                                class='p-2 w-1/4 grow-0 self-end rounded-xs text-primary text-center border invalid:border-rose-500 valid:border-green-600'
                             />
                         </label>
                     );
@@ -50,7 +50,7 @@ const andre = utgivelser.utgivelser.andre_forfattere;
         </fieldset>
         <fieldset class='w-full flex flex-col justify-between gap-2'>
             {
-                andre.map((bok: bok) => {
+                andre.map((bok: Bok) => {
                     const name = bok.tittel.toLowerCase();
                     if (bok.pris)
                         return (
@@ -61,7 +61,7 @@ const andre = utgivelser.utgivelser.andre_forfattere;
                                     type='number'
                                     max='10'
                                     placeholder='0'
-                                    class='p-2 w-1/4 grow-0 self-end rounded-sm text-primary text-center border invalid:border-rose-500 valid:border-green-600'
+                                    class='p-2 w-1/4 grow-0 self-end rounded-xs text-primary text-center border invalid:border-rose-500 valid:border-green-600'
                                 />
                             </label>
                         );
@@ -77,7 +77,7 @@ const andre = utgivelser.utgivelser.andre_forfattere;
                     name='fornavn'
                     type='text'
                     placeholder='Fornavn'
-                    class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                    class='p-2 rounded-xs text-primary border invalid:border-rose-500 valid:border-green-600'
                 />
             </label>
             <label class='mt-2 flex flex-col w-full'>
@@ -87,7 +87,7 @@ const andre = utgivelser.utgivelser.andre_forfattere;
                     name='etternavn'
                     type='text'
                     placeholder='Etternavn'
-                    class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                    class='p-2 rounded-xs text-primary border invalid:border-rose-500 valid:border-green-600'
                 />
             </label>
         </fieldset>
@@ -98,7 +98,7 @@ const andre = utgivelser.utgivelser.andre_forfattere;
                 required
                 type='email'
                 placeholder='epost@adresse.no'
-                class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                class='p-2 rounded-xs text-primary border invalid:border-rose-500 valid:border-green-600'
             />
         </label>
 
@@ -110,10 +110,10 @@ const andre = utgivelser.utgivelser.andre_forfattere;
                     required
                     type='text'
                     placeholder='Adresse'
-                    class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                    class='p-2 rounded-xs text-primary border invalid:border-rose-500 valid:border-green-600'
                 />
             </label>
-            <div class='grid grid-cols-1 md:grid-cols-[auto,1fr] gap-2'>
+            <div class='grid grid-cols-1 md:grid-cols-[auto_1fr] gap-2'>
                 <label class='mt-2 flex flex-col w-full'>
                     Postnummer
                     <input
@@ -122,7 +122,7 @@ const andre = utgivelser.utgivelser.andre_forfattere;
                         maxlength='4'
                         type='text'
                         placeholder='1234'
-                        class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                        class='p-2 rounded-xs text-primary border invalid:border-rose-500 valid:border-green-600'
                     />
                 </label>
                 <label class='mt-2 flex flex-col w-full'>
@@ -132,7 +132,7 @@ const andre = utgivelser.utgivelser.andre_forfattere;
                         required
                         type='text'
                         placeholder='Sted'
-                        class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                        class='p-2 rounded-xs text-primary border invalid:border-rose-500 valid:border-green-600'
                     />
                 </label>
             </div>
@@ -141,7 +141,7 @@ const andre = utgivelser.utgivelser.andre_forfattere;
             Kommentar til bestillingen?
             <textarea
                 name='melding'
-                class='p-2 rounded-sm text-primary border invalid:border-rose-500 valid:border-green-600'
+                class='p-2 rounded-xs text-primary border invalid:border-rose-500 valid:border-green-600'
                 placeholder='Vil du ha autografen i boka sier`u?'
                 rows='3'></textarea>
         </label>
@@ -150,7 +150,7 @@ const andre = utgivelser.utgivelser.andre_forfattere;
             name='submit'
             type='submit'
             value='Send Bestilling'
-            class='py-2 mt-4 rounded-sm bg-[#efb261] text-black text-secondary cursor-pointer hover:text-amber-100 hover:bg-yellow-900 md:w-1/2 md:justify-self-start uppercase'
+            class='py-2 mt-4 rounded-xs bg-[#efb261] text-black text-secondary cursor-pointer hover:text-amber-100 hover:bg-yellow-900 md:w-1/2 md:justify-self-start uppercase'
         />
     </form>
 </section>

@@ -9,7 +9,7 @@ const currentPath = pathname.slice(1);
     <div>
         <button
             type='button'
-            class='inline-flex w-full justify-center rounded-sm border border-gray-300 px-4 py-2 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100 bg-[#efb261] text-black text-secondary hover:text-amber-100 hover:bg-yellow-900'
+            class='inline-flex w-full justify-center rounded-xs border border-gray-300 px-4 py-2 text-sm font-medium shadow-xs focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100 bg-[#efb261] text-black text-secondary hover:text-amber-100 hover:bg-yellow-900'
             id='utgivelserBtn'
             aria-expanded='true'
             aria-haspopup='true'
@@ -31,7 +31,7 @@ const currentPath = pathname.slice(1);
         </button>
     </div>
     <div
-        class='hidden absolute right-0 z-10 mt-2 w-full md:w-56 lg:w-full origin-top-right rounded-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'
+        class='hidden absolute right-0 z-10 mt-2 w-full md:w-56 lg:w-full origin-top-right rounded-xs bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden'
         role='menu'
         aria-orientation='vertical'
         aria-labelledby='menu-button'
@@ -43,7 +43,7 @@ const currentPath = pathname.slice(1);
                 currentPath === 'utgivelser/bryggepraten-boka' ? (
                     <a
                         href='/utgivelser/bryggepraten-boka'
-                        class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-xs text-sm font-medium    active:text-white'
                         aria-current='page'
                     >
                         Bryggepraten Boka
@@ -51,7 +51,7 @@ const currentPath = pathname.slice(1);
                 ) : (
                     <a
                         href='/utgivelser/bryggepraten-boka'
-                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-xs text-sm font-medium    active:text-white'
                     >
                         Bryggepraten Boka
                     </a>
@@ -61,7 +61,7 @@ const currentPath = pathname.slice(1);
                 currentPath === 'utgivelser/denne-fuglen-har-floyet' ? (
                     <a
                         href='/utgivelser/denne-fuglen-har-floyet'
-                        class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-xs text-sm font-medium    active:text-white'
                         aria-current='page'
                     >
                         Denne Fuglen Har Fløyet
@@ -69,7 +69,7 @@ const currentPath = pathname.slice(1);
                 ) : (
                     <a
                         href='/utgivelser/denne-fuglen-har-floyet'
-                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-xs text-sm font-medium    active:text-white'
                     >
                         Denne Fuglen Har Fløyet
                     </a>
@@ -79,7 +79,7 @@ const currentPath = pathname.slice(1);
                 currentPath === 'utgivelser/veiene-inn' ? (
                     <a
                         href='/utgivelser/veiene-inn'
-                        class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-xs text-sm font-medium    active:text-white'
                         aria-current='page'
                     >
                         Veiene Inn
@@ -87,7 +87,7 @@ const currentPath = pathname.slice(1);
                 ) : (
                     <a
                         href='/utgivelser/veiene-inn'
-                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-xs text-sm font-medium    active:text-white'
                     >
                         Veiene Inn
                     </a>
@@ -97,7 +97,7 @@ const currentPath = pathname.slice(1);
                 currentPath === 'utgivelser/underveis-kan-du-late-som-du-flyr' ? (
                     <a
                         href='/utgivelser/underveis-kan-du-late-som-du-flyr'
-                        class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-xs text-sm font-medium    active:text-white'
                         aria-current='page'
                     >
                         Underveis kan du late som du flyr
@@ -105,7 +105,7 @@ const currentPath = pathname.slice(1);
                 ) : (
                     <a
                         href='/utgivelser/underveis-kan-du-late-som-du-flyr'
-                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-xs text-sm font-medium    active:text-white'
                     >
                         Underveis kan du late som du flyr
                     </a>
@@ -116,7 +116,7 @@ const currentPath = pathname.slice(1);
                 currentPath === 'utgivelser/liv-og-leven-pa-karia' ? (
                     <a
                         href='/utgivelser/liv-og-leven-pa-karia'
-                        class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-xs text-sm font-medium    active:text-white'
                         aria-current='page'
                     >
                         Liv og leven på Karia
@@ -124,7 +124,7 @@ const currentPath = pathname.slice(1);
                 ) : (
                     <a
                         href='/utgivelser/liv-og-leven-pa-karia'
-                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-xs text-sm font-medium    active:text-white'
                     >
                         Liv og leven på Karia
                     </a>
@@ -134,7 +134,7 @@ const currentPath = pathname.slice(1);
                 currentPath === 'utgivelser/dribble' ? (
                     <a
                         href='/utgivelser/dribble'
-                        class='bg-gray-900 text-white px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-xs text-sm font-medium    active:text-white'
                         aria-current='page'
                     >
                         Dribble
@@ -142,7 +142,7 @@ const currentPath = pathname.slice(1);
                 ) : (
                     <a
                         href='/utgivelser/dribble'
-                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-sm text-sm font-medium    active:text-white'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-xs text-sm font-medium    active:text-white'
                     >
                         Dribble
                     </a>
