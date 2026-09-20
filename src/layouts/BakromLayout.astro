@@ -1,0 +1,28 @@
+---
+export interface Props {
+    title: string;
+    showNav?: boolean;
+}
+
+const { title, showNav = true } = Astro.props;
+import AdminHeader from '../components/AdminHeader.astro';
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang='no'>
+    <head>
+        <meta charset='UTF-8' />
+        <meta name='viewport' content='width=device-width' />
+        <meta name='robots' content='noindex, nofollow' />
+        <title>{title} — Bakrommet</title>
+    </head>
+    <body class='min-h-screen bg-gray-100 leading-relaxed'>
+        <div class='container min-h-screen mx-auto text-slate-900 bg-slate-50'>
+            <AdminHeader showNav={showNav} />
+            <main class='p-4 mx-auto max-w-2xl grid gap-8 mb-8'>
+                <slot />
+            </main>
+        </div>
+    </body>
+</html>

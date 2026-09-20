@@ -1,0 +1,183 @@
+---
+export const prerender = false;
+
+import BakromLayout from '../../../layouts/BakromLayout.astro';
+import { getJson, putJson, putImage } from '../../../lib/github';
+import type { UtgivelserData, BokKategori } from '../../../lib/contentTypes';
+
+const UTGIVELSER_PATH = 'src/constants/utgivelser.json';
+const IMAGE_DIR = 'src/images/bokomslag';
+const KATEGORIER: BokKategori[] = ['bryggepraten', 'andre_forfattere'];
+
+const { slug } = Astro.params;
+
+let errorMessage = '';
+
+const existing = await getJson<UtgivelserData>(UTGIVELSER_PATH);
+const data = existing?.data ?? {
+    utgivelser: { bryggepraten: [], kalendere: [], andre_forfattere: [] },
+};
+
+const findCurrent = () => {
+    for (const kategori of KATEGORIER) {
+        const index = data.utgivelser[kategori].findIndex((b) => b.slug === slug);
+        if (index !== -1) return { kategori, index, item: data.utgivelser[kategori][index] };
+    }
+    return null;
+};
+
+const current = findCurrent();
+if (!current) {
+    return Astro.redirect('/bakrommet/utgivelser');
+}
+let item = current.item;
+
+if (Astro.request.method === 'POST') {
+    const formData = await Astro.request.formData();
+    const action = formData.get('action');
+
+    try {
+        if (action === 'slett') {
+            data.utgivelser[current.kategori].splice(current.index, 1);
+            await putJson(UTGIVELSER_PATH, data, `Slett utgivelse: ${item.tittel}`);
+            return Astro.redirect('/bakrommet/utgivelser');
+        }
+
+        const tittel = formData.get('tittel');
+        const kategori = formData.get('kategori') as BokKategori | null;
+        const forfattere = formData.get('forfattere');
+        const sjanger = formData.get('sjanger');
+        const pris = formData.get('pris');
+        const status = formData.get('status');
+        const body = formData.get('body');
+        const image = formData.get('image');
+
+        const validInput =
+            typeof tittel === 'string' &&
+            tittel.trim().length > 0 &&
+            (kategori === 'bryggepraten' || kategori === 'andre_forfattere') &&
+            typeof forfattere === 'string';
+
+        if (validInput) {
+            let imageFilename = item.image;
+            if (image instanceof File && image.size > 0) {
+                const ext = image.name.split('.').pop() || 'jpg';
+                imageFilename = `${slug}.${ext}`;
+                await putImage(
+                    `${IMAGE_DIR}/${imageFilename}`,
+                    await image.arrayBuffer(),
+                    `Bilde for utgivelse: ${tittel}`,
+                );
+            }
+
+            const updatedBok = {
+                tittel,
+                slug,
+                forfattere: forfattere
+                    .split(',')
+                    .map((f) => f.trim())
+                    .filter(Boolean),
+                sjanger: typeof sjanger === 'string' ? sjanger : '',
+                pris: typeof pris === 'string' ? pris : '',
+                status: typeof status === 'string' ? status : '',
+                body: typeof body === 'string' ? body : '',
+                ...(imageFilename ? { image: imageFilename } : {}),
+            };
+
+            // Remove from current category, then push into the (possibly new) one.
+            data.utgivelser[current.kategori].splice(current.index, 1);
+            data.utgivelser[kategori].push(updatedBok);
+
+            await putJson(UTGIVELSER_PATH, data, `Rediger utgivelse: ${tittel}`);
+            return Astro.redirect('/bakrommet/utgivelser');
+        }
+        errorMessage = 'Fyll ut tittel, kategori og forfattere.';
+    } catch (error) {
+        console.error(error);
+        errorMessage = 'Noe gikk galt ved lagring. Prøv igjen.';
+    }
+}
+---
+
+<BakromLayout title={`Rediger: ${item.tittel}`}>
+    <h2 class='text-xl md:text-2xl font-bold'>Rediger utgivelse</h2>
+    {errorMessage && <p class='text-rose-600 font-semibold'>{errorMessage}</p>}
+
+    <form method='POST' enctype='multipart/form-data' class='grid gap-3 max-w-xl'>
+        <label class='flex flex-col w-full'>
+            Tittel
+            <input
+                type='text'
+                name='tittel'
+                required
+                value={item.tittel}
+                class='p-2 rounded-xs text-primary border invalid:border-rose-500 valid:border-green-600'
+            />
+        </label>
+        <label class='flex flex-col w-full'>
+            Kategori
+            <select name='kategori' required class='p-2 rounded-xs text-primary border'>
+                <option value='bryggepraten' selected={current.kategori === 'bryggepraten'}>
+                    Bryggepraten
+                </option>
+                <option value='andre_forfattere' selected={current.kategori === 'andre_forfattere'}>
+                    Andre forfattere
+                </option>
+            </select>
+        </label>
+        <label class='flex flex-col w-full'>
+            Forfattere (kommaseparert)
+            <input
+                type='text'
+                name='forfattere'
+                required
+                value={item.forfattere?.join(', ')}
+                class='p-2 rounded-xs text-primary border invalid:border-rose-500 valid:border-green-600'
+            />
+        </label>
+        <label class='flex flex-col w-full'>
+            Sjanger
+            <input
+                type='text'
+                name='sjanger'
+                value={item.sjanger}
+                class='p-2 rounded-xs text-primary border'
+            />
+        </label>
+        <label class='flex flex-col w-full'>
+            Pris
+            <input type='text' name='pris' value={item.pris} class='p-2 rounded-xs text-primary border' />
+        </label>
+        <label class='flex flex-col w-full'>
+            Status
+            <input
+                type='text'
+                name='status'
+                value={item.status}
+                class='p-2 rounded-xs text-primary border'
+            />
+        </label>
+        <label class='flex flex-col w-full'>
+            Bokomslag {item.image && `(nåværende: ${item.image})`}
+            <input type='file' name='image' accept='image/*' class='p-2' />
+        </label>
+        <label class='flex flex-col w-full'>
+            Beskrivelse (Markdown støttes: **fet**, *kursiv*, avsnitt)
+            <textarea name='body' rows='8' class='p-2 rounded-xs text-primary border'>{item.body}</textarea>
+        </label>
+        <input
+            type='submit'
+            value='Lagre'
+            class='py-2 mt-2 rounded-xs bg-[#efb261] text-black cursor-pointer hover:text-amber-100 hover:bg-yellow-900 md:w-1/2'
+        />
+    </form>
+
+    <form method='POST' onsubmit='return confirm("Slette denne utgivelsen?")' class='mt-2'>
+        <input type='hidden' name='action' value='slett' />
+        <input
+            type='submit'
+            value='Slett utgivelse'
+            class='py-2 px-4 rounded-xs bg-rose-700 text-white cursor-pointer hover:bg-rose-800'
+        />
+    </form>
+</BakromLayout>

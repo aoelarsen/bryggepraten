@@ -1,0 +1,133 @@
+---
+export const prerender = false;
+
+import BakromLayout from '../../../layouts/BakromLayout.astro';
+import { getJson, putJson, putImage } from '../../../lib/github';
+import type { NyheterData } from '../../../lib/contentTypes';
+
+const NYHETER_PATH = 'src/constants/nyheter.json';
+const IMAGE_DIR = 'src/images/nyheter';
+
+const { id } = Astro.params;
+
+let errorMessage = '';
+const existing = await getJson<NyheterData>(NYHETER_PATH);
+const nyheter = existing?.data.nyheter ?? [];
+let item = nyheter.find((n) => n.id === id);
+
+if (!item) {
+    return Astro.redirect('/bakrommet/nyheter');
+}
+
+if (Astro.request.method === 'POST') {
+    const formData = await Astro.request.formData();
+    const action = formData.get('action');
+
+    try {
+        if (action === 'slett') {
+            const updated = { nyheter: nyheter.filter((n) => n.id !== id) };
+            await putJson(NYHETER_PATH, updated, `Slett nyhet: ${item.tittel}`);
+            return Astro.redirect('/bakrommet/nyheter');
+        }
+
+        const tittel = formData.get('tittel');
+        const dato = formData.get('dato');
+        const body = formData.get('body');
+        const image = formData.get('image');
+
+        const validInput =
+            typeof tittel === 'string' &&
+            tittel.trim().length > 0 &&
+            typeof dato === 'string' &&
+            typeof body === 'string';
+
+        if (validInput) {
+            let imageFilename = item.image;
+            if (image instanceof File && image.size > 0) {
+                const ext = image.name.split('.').pop() || 'jpg';
+                imageFilename = `${id}.${ext}`;
+                await putImage(
+                    `${IMAGE_DIR}/${imageFilename}`,
+                    await image.arrayBuffer(),
+                    `Bilde for nyhet: ${tittel}`,
+                );
+            }
+
+            const updated = {
+                nyheter: nyheter
+                    .map((n) =>
+                        n.id === id
+                            ? { id, tittel, dato, body, ...(imageFilename ? { image: imageFilename } : {}) }
+                            : n,
+                    )
+                    .sort((a, b) => b.dato.localeCompare(a.dato)),
+            };
+
+            await putJson(NYHETER_PATH, updated, `Rediger nyhet: ${tittel}`);
+            return Astro.redirect('/bakrommet/nyheter');
+        }
+        errorMessage = 'Fyll ut tittel, dato og innhold.';
+    } catch (error) {
+        console.error(error);
+        errorMessage = 'Noe gikk galt ved lagring. Prøv igjen.';
+    }
+}
+---
+
+<BakromLayout title={`Rediger: ${item.tittel}`}>
+    <h2 class='text-xl md:text-2xl font-bold'>Rediger nyhet</h2>
+    {errorMessage && <p class='text-rose-600 font-semibold'>{errorMessage}</p>}
+
+    <form method='POST' enctype='multipart/form-data' class='grid gap-3 max-w-xl'>
+        <label class='flex flex-col w-full'>
+            Tittel
+            <input
+                type='text'
+                name='tittel'
+                required
+                value={item.tittel}
+                class='p-2 rounded-xs text-primary border invalid:border-rose-500 valid:border-green-600'
+            />
+        </label>
+        <label class='flex flex-col w-full'>
+            Dato
+            <input
+                type='date'
+                name='dato'
+                required
+                value={item.dato}
+                class='p-2 rounded-xs text-primary border invalid:border-rose-500 valid:border-green-600'
+            />
+        </label>
+        <label class='flex flex-col w-full'>
+            Bilde {item.image && `(nåværende: ${item.image})`}
+            <input type='file' name='image' accept='image/*' class='p-2' />
+        </label>
+        <label class='flex flex-col w-full'>
+            Innhold (Markdown støttes: **fet**, *kursiv*, avsnitt)
+            <textarea
+                name='body'
+                required
+                rows='6'
+                class='p-2 rounded-xs text-primary border invalid:border-rose-500 valid:border-green-600'>{item.body}</textarea>
+        </label>
+        <input
+            type='submit'
+            value='Lagre'
+            class='py-2 mt-2 rounded-xs bg-[#efb261] text-black cursor-pointer hover:text-amber-100 hover:bg-yellow-900 md:w-1/2'
+        />
+    </form>
+
+    <form
+        method='POST'
+        onsubmit='return confirm("Slette denne nyheten?")'
+        class='mt-2'
+    >
+        <input type='hidden' name='action' value='slett' />
+        <input
+            type='submit'
+            value='Slett nyhet'
+            class='py-2 px-4 rounded-xs bg-rose-700 text-white cursor-pointer hover:bg-rose-800'
+        />
+    </form>
+</BakromLayout>

@@ -1,13 +1,5 @@
 ---
-interface Bok {
-    tittel: string;
-    sjanger?: string;
-    forfattere: string[];
-    utgivelsesdato?: string;
-    pris?: string;
-    status?: string;
-}
-
+import type { Bok } from '../lib/contentTypes';
 import utgivelser from '../constants/utgivelser.json';
 
 const bryggeprat = utgivelser.utgivelser.bryggepraten;

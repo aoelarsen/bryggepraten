@@ -1,0 +1,33 @@
+---
+const pathname = new URL(Astro.request.url).pathname;
+
+const links = [
+    { href: '/bakrommet', label: 'Dashboard' },
+    { href: '/bakrommet/nyheter', label: 'Siste nytt' },
+    { href: '/bakrommet/utgivelser', label: 'Utgivelser' },
+];
+---
+
+<nav class='self-center justify-self-end flex flex-wrap items-center gap-2'>
+    {
+        links.map((link) => (
+            <a
+                href={link.href}
+                class={
+                    pathname === link.href || pathname.startsWith(link.href + '/')
+                        ? 'bg-gray-900 text-white px-3 py-2 rounded-xs text-sm font-medium'
+                        : 'text-blue-900 hover:text-blue-700 px-3 py-2 rounded-xs text-sm font-medium'
+                }
+            >
+                {link.label}
+            </a>
+        ))
+    }
+    <form method='POST' action='/bakrommet/logout'>
+        <input
+            type='submit'
+            value='Logg ut'
+            class='px-3 py-2 rounded-xs bg-black text-white text-sm cursor-pointer hover:bg-gray-800'
+        />
+    </form>
+</nav>

@@ -1,45 +1,60 @@
 {
-  "utgivelser": {  
+  "utgivelser": {
     "bryggepraten": [
       {
         "tittel": "Bryggepraten Boka",
+        "slug": "bryggepraten-boka",
+        "image": "bryggepratenBoka.png",
         "sjanger": "",
         "forfattere": ["Birger Dyve Larsen", "Jørund Holst-Hansen"],
         "utgivelsesdato": "",
         "pris": "200",
-        "status": "få eksemplarer igjen"        
+        "status": "få eksemplarer igjen",
+        "body": "**Kun få eksemplarer igjen!**\n\nObservasjonær, funderingær, kommentarær, avsporingær, frie asssosiasjonær. Larsen og Hansen har svaret.\n\nBryggepraten (bok 1): De to herrer kommer med sine observasjoner og kommentarer, ofte med utgangspunkt i saker som har stått omtalt i Sandefjords Blad. De er mer eller mindre saklige, mer eller mindre preget av kunnskap om hva sakene egentlig gjelder, men alltid klare for å la assosiasjonene løpe fritt. Også der hvor disse ser ut til å løpe ut i det lettere absurde. Og hele tiden på et slags nokså fritt sandefjordsmål, ubundet av ortografiske og andre regler.\n\nBoka selges til inntekt for det arbeidet som FJORDBLUES gjør ved å drifte musikkskole for barn i Esteli, Nicaragua. Les mer om [Nicaragua-prosjektet](#nicaragua).\n\n<article id=\"nicaragua\">\n\n## Nicaragua-prosjektet\n\nFjordbluesfestivalen så dagens lys i 2004 på øya Lindholmen i Vestfjorden. Alle musikerne spiller gratis. Overskuddet fra festivalen brukes til å drifte to musikkskoler i Nicaragua for til sammen 50 barn og unge. Dette har blitt prosjektets hovedmål og en viktig grunn til at mange mennesker besøker oss hvert år, den andre helgen i august, og at artistene fortsatt spiller gratis.\n\nVårt engasjement i Nicaragua blir meget godt mottatt av våre publikummere, og en ny dimensjon er knyttet til festivalen: Vi hjelper barn på andre siden av jordkloden til et bedre liv. Vi driver altså to musikkskolegrupper oppe i fjellene i Esteli, en by som ligger 800 meter over havet i Nicaragua. Våre lærere, som tidligere levde av å spille på restauranter om kvelden, der de fikk lov, har sluttet med dette og jobber kun for oss, 6 dager i uka. De får 5 USD i timen og lønnes for 12 timer i uka. I tillegg får de ekstra betalt for lang kjørevei til den ene musikkskolen, samt litt penger til mat. Lønnen er nok til å forsørge deres familier, og det har gitt barna i familien muligheter til å studere. I tillegg til at 50 barn får en verdifull og meningsfull fritid.\n\nVi finansierer også gitarer, fløyter, papir og blyanter, samt en del materiell og utstyr til vår samarbeidspartner Movedupce. De siste årene har festivalen blitt arrangert på Gokstad kystlag.\n\n</article>"
       },
       {
         "tittel": "Denne Fuglen Har Fløyet",
+        "slug": "denne-fuglen-har-floyet",
+        "image": "fuglenOmslag.png",
         "sjanger": "",
         "forfattere": ["Birger Dyve Larsen", "Jørund Holst-Hansen"],
         "utgivelsesdato": "",
         "pris": "250",
-        "status": ""
+        "status": "",
+        "body": "*Bryggepratens krimbok i salg fortsatt!*\n\nEtter braksuksessen med sin første bok Bryggepraten, har forfatterne sendt de voksne ”Hardy-guttene” ut for å løse en krimgåte. Det meste av Jahres formue er kjent, men denne historien gir helt andre dimensjoner til uttrykket formue. Hadde virkelig Jahre kommet over en av verdens mest ettertraktede skatter? Hansen og Larsen må ut på en farefull ferd for å finne løsningen. Dette kan være en umusikalsk bok for borgerne av Anders Jahres hjemby.\n\n### Bokanmeldelse av T. Songedal\n\n> Jeg koste meg med denne boka. Jørund Holst-Hansen og Birger Dyve Larsen leker som vi er vant til i ”Bryggepraten”, både med karakterene, språket, filosofi, historie og politikk.\n>\n> Her møter vi de to kjenningene Hansen og Larsen, som er like surrete og filosofiske som de pleier, der de gjennom fortellingen er innom historie, både lokal, nasjonal og internasjonal. De er også stadig innom politikk og filosofi, slik vi er vant til. For en som har studert teater er det også interessant at de bruker Aristoteles sin ”poetikk”, når de snakker om dramaturgien i en historie.\n>\n> De to forfatterne er tydelig også Beatlestilhengere. Dette kommer fram gjennom både bokas tittel og titlene på kapitlene, og gjennom stadige små Beatles-drypp som er med på å binde historien sammen.\n>\n> Jeg er ikke lokalkjent verken i Sandefjord eller Andalucia, hvor mye av handlingen foregår, men det gjør absolutt ikke noe, for historien bæres hele tiden av karakterene, som også inkluderer en eldre svenske og en forteller. Å bruke en forteller er et godt virkemiddel, og en fin måte å drive historien videre når Hansen og Larsen surrer rundt på sin vante måte og er på vei til å rote seg bort.\n>\n> Humoren til Hansen og Larsen er som forventet, og det er også noe av det som gjorde at jeg koste meg.\n\n<figure class=\"p-4\">\n<iframe src=\"https://open.spotify.com/embed/playlist/5oMlhvEhrUSrd5Ga1QVmMI?utm_source=generator\" width=\"100%\" height=\"650\" frameborder=\"0\" allowfullscreen allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\"></iframe>\n</figure>"
       },
       {
         "tittel": "Bryggepratens Håndbok - Veiene Inn",
+        "slug": "veiene-inn",
+        "image": "veieneInnOmslag.png",
         "sjanger": "",
         "forfattere": ["Birger Dyve Larsen", "Jørund Holst-Hansen"],
         "utgivelsesdato": "",
         "pris": "250",
-        "status": ""
+        "status": "",
+        "body": "*Åssen er sandefjordingær og åssenbli en av dem? For sandefjordingær, innfløtterær og andre.*\n\nEn håndbok &hyphen; Denne boka vil være til stor hjelp for alle som vil komme i nærkontakt med mennesker fra Sandefjord. Boka vil også være et meget utmerket utgangspunkt for sandefjordinger til å forstå innflyttere. Og ikke minst vil den også være til stor hjelp for at sandefjordingen kan forstå seg selv."
       },
       {
         "tittel": "Underveis kan du late som du flyr",
+        "slug": "underveis-kan-du-late-som-du-flyr",
+        "image": "underveiskandulatesomduflyr.jpg",
         "sjanger": "",
         "forfattere": ["Birger Dyve Larsen", "Jørund Holst-Hansen"],
         "utgivelsesdato": "",
         "pris": "299",
-        "status": ""
+        "status": "",
+        "body": "Litteraturviteren RUTH SJEBANE har møysommelig arbeidet seg gjennom materialet, og har på den måten tegnet et levende bilde av Davidsen.\n\n**Forfatteren skriver:**\n\n> «LEONARD O. DAVIDSEN var en meget stor og betydningsfull mann i Sandefjord på 1800-tallet, men tydeligvis undervurdert i sin samtid, og siden glemt. Han skal ha vært det man nærmest kan kalle et renessansemenneske, med evner og kompetanse på en rekke områder. Når han ikke er bedre kjent, skyldes det i hovedsak to forhold: Han var nok egentlig en beskjeden fyr. Dessuten viser det seg at hans ideer og forslag ble aktivt motarbeidet av ressurssterke og, vi må vel kunne si udemokratiske, krefter i byen.»\n\nBryggekanten Forlag mener også at dette er en kommentar til dagens konspirasjons-teorier.\n\nSamtidig som forlaget nå utgir Sjebanes manuskript, viser det seg at forfatteren selv har forsvunnet. Boken inneholder derfor også en beretning om forlagets dramatiske forsøk på å komme i kontakt med henne."
       },
       {
         "tittel": "Bryggepraten 2 - Før vi legger på røret..?",
+        "slug": "bryggepraten-2",
+        "image": "bryggepraten2Bokforside.jpg",
         "sjanger": "utvalgte pratær m.m.",
         "forfattere": ["Birger Dyve Larsen", "Jørund Holst-Hansen"],
         "utgivelsesdato": "",
         "pris": "199",
-        "status": ""
+        "status": "",
+        "body": "Konsert og prat! Her blir det både musikk og preik.\n\nMer informasjon om denne utgivelsen kommer snart."
       }
     ],
     "kalendere": [
@@ -54,20 +69,26 @@
     "andre_forfattere": [
       {
         "tittel": "Liv Og Leven På Karia",
+        "slug": "liv-og-leven-pa-karia",
+        "image": "kariaOmslag.png",
         "sjanger": "",
         "forfattere": ["Øyvind Børresen"],
         "utgivelsesdato": "",
         "pris": "200",
-        "status": ""
+        "status": "",
+        "body": "**Øyvind Børresen** (f.1956) er født i Larvik og vokste opp på Karistranda på Torstrand. I diktform skriver han om minner fra barndommen på 1960-tallet. Med varme og innsikt forteller han om originale personer og Karistranda eller Karia som han kaller det.\n\n<img src=\"/images/oyvind.png\" alt=\"illustrasjon av Øyvind Børresen\" class=\"md:max-w-[400px]\" />\n\n> Der Strandgata begynner\n> og Havnegata går på tvers,\n> Der nede ligger «Karia»\n> mitt barndoms univers\n>\n> &hyphen; Øyvind Børresen, *Liv og leven på Karia*"
       },
       {
         "tittel": "Dribble",
+        "slug": "dribble",
+        "image": "dribbleOmslag.png",
         "sjanger": "",
         "forfattere": ["Åshild Thunes"],
         "utgivelsesdato": "",
         "pris": "",
-        "status": ""
+        "status": "",
+        "body": "Bli kjent med Anton Karlsen og bygda hans, DRIBBLE.\n\nForfatter Åshild Thune er bosatt i Porsgrunn, men er opprinnelig fra Sørreisa. Hun er utdannet sosionom. Tidligere utgivelse ”Skulpturen” (2011).\n\n### Utdrag fra Dribble\n\n> Anton Karlsen åpner døra på sin nye, havblå Kia. Lyden er som et kvinesukk. Han stryker rundt rattet og setter seg i bilen. Setet, lyst grått og tilpassa en normalkropp som den Anton Karlsen har, tar behagelig imot ham. Heldigvis automatgir, tenker han og minnes den gamle Citroengen med slarket girspak.\n>\n> Anton Karlsen har skaffa seg bygdas første el-bil. Han skal kjøre sakte og omstendelig rundt på alle sine oppdrag. Jomfrutur er det han skal på. Han skal gi folk anledning til å se, spørre, glise og si at han snart blir stående mellom Finnvolljordet og Minushaugen med dau bil, han som er så fin på det at han ikke vil kjøre diesel.\n>\n> Men Anton Karlsen er ikke fin på det. Han har lest seg opp på verdens bedrøvelige gang og vet at framskrittet ligger i el. Bygda hans rager ikke høyt på forurensingskalaen etter at tremassefabrikken ble lagt ned. Sjøl har han ikke bevega seg lenger sør i verden enn til en campingplass på Løkken i Danmark.\n>\n> Men Anton ser seg som globalist. Alt henger sammen med alt, vil han si til de som bryr seg. Denne bilfilla er bare et ørlite bidrag til en bedre verden. De fleste vil glise skjevt og snakke drit bak ryggen hans. Men hva gjør det? Anton Karlsen har høyere mål i livet enn å stirre på skotuppene og sjekke prostataen."
       }
     ]
-}
+  }
 }

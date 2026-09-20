@@ -1,0 +1,62 @@
+---
+export const prerender = false;
+
+import BakromLayout from '../../layouts/BakromLayout.astro';
+import { verifyLogin } from '../../lib/cmsAuth';
+
+let errorMessage = '';
+
+const existingUser = await Astro.session?.get('user');
+if (existingUser) return Astro.redirect('/bakrommet');
+
+if (Astro.request.method === 'POST') {
+    const formData = await Astro.request.formData();
+    const username = formData.get('username');
+    const password = formData.get('password');
+
+    const verified =
+        typeof username === 'string' && typeof password === 'string'
+            ? verifyLogin(username.toLowerCase().trim(), password)
+            : null;
+
+    if (verified) {
+        Astro.session?.set('user', verified);
+        return Astro.redirect('/bakrommet');
+    }
+
+    errorMessage = 'Feil brukernavn eller passord';
+    Astro.response.status = 400;
+}
+---
+
+<BakromLayout title='Logg inn' showNav={false}>
+    <h2 class='text-xl md:text-2xl font-bold'>Logg inn</h2>
+    {errorMessage && <p class='text-rose-600 font-semibold'>{errorMessage}</p>}
+    <form method='POST' class='grid gap-3 max-w-sm'>
+        <label class='flex flex-col w-full'>
+            Brukernavn
+            <input
+                type='text'
+                name='username'
+                required
+                autocomplete='username'
+                class='p-2 rounded-xs text-primary border invalid:border-rose-500 valid:border-green-600'
+            />
+        </label>
+        <label class='flex flex-col w-full'>
+            Passord
+            <input
+                type='password'
+                name='password'
+                required
+                autocomplete='current-password'
+                class='p-2 rounded-xs text-primary border invalid:border-rose-500 valid:border-green-600'
+            />
+        </label>
+        <input
+            type='submit'
+            value='Logg inn'
+            class='py-2 mt-2 rounded-xs bg-[#efb261] text-black cursor-pointer hover:text-amber-100 hover:bg-yellow-900 md:w-1/2'
+        />
+    </form>
+</BakromLayout>

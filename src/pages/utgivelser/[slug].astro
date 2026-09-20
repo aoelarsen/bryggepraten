@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets';
+import { marked } from 'marked';
+import Layout from '../../layouts/Layout.astro';
+import utgivelserData from '../../constants/utgivelser.json';
+import type { Bok } from '../../lib/contentTypes';
+
+export function getStaticPaths() {
+    const alle: Bok[] = [
+        ...utgivelserData.utgivelser.bryggepraten,
+        ...utgivelserData.utgivelser.andre_forfattere,
+    ];
+
+    return alle
+        .filter((bok) => bok.slug)
+        .map((bok) => ({ params: { slug: bok.slug }, props: { bok } }));
+}
+
+interface Props {
+    bok: Bok;
+}
+
+const { bok } = Astro.props;
+
+const coverImages = import.meta.glob<{ default: ImageMetadata }>('/src/images/bokomslag/*', {
+    eager: true,
+});
+const coverEntry = bok.image
+    ? Object.entries(coverImages).find(([path]) => path.endsWith(`/${bok.image}`))
+    : undefined;
+const cover = coverEntry?.[1].default;
+
+const bodyHtml = bok.body ? marked.parse(bok.body) : '';
+---
+
+<Layout title={bok.tittel}>
+    <main class='p-4 mx-auto max-w-2xl grid gap-8 mb-8'>
+        <h2 class='text-xl md:text-3xl'>{bok.tittel}</h2>
+        {bok.status && <p class='font-bold'>{bok.status}</p>}
+        {
+            cover && (
+                <figure class='grid'>
+                    <Image
+                        loading='lazy'
+                        src={cover}
+                        alt={`bokomslaget til ${bok.tittel}`}
+                        class='place-self-center'
+                    />
+                </figure>
+            )
+        }
+        <div class='prose max-w-none' set:html={bodyHtml} />
+    </main>
+</Layout>

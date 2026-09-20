@@ -1,0 +1,131 @@
+---
+export const prerender = false;
+
+import BakromLayout from '../../../layouts/BakromLayout.astro';
+import { getJson, putJson, putImage } from '../../../lib/github';
+import { slugify, uniqueSlug } from '../../../lib/slugify';
+import type { NyheterData } from '../../../lib/contentTypes';
+
+const NYHETER_PATH = 'src/constants/nyheter.json';
+const IMAGE_DIR = 'src/images/nyheter';
+
+let errorMessage = '';
+
+const existing = await getJson<NyheterData>(NYHETER_PATH);
+let nyheter = existing?.data.nyheter ?? [];
+
+if (Astro.request.method === 'POST') {
+    const formData = await Astro.request.formData();
+    const tittel = formData.get('tittel');
+    const dato = formData.get('dato');
+    const body = formData.get('body');
+    const image = formData.get('image');
+
+    const validInput =
+        typeof tittel === 'string' &&
+        tittel.trim().length > 0 &&
+        typeof dato === 'string' &&
+        typeof body === 'string';
+
+    if (validInput) {
+        try {
+            const id = uniqueSlug(
+                slugify(tittel),
+                nyheter.map((n) => n.id),
+            );
+
+            let imageFilename: string | undefined;
+            if (image instanceof File && image.size > 0) {
+                const ext = image.name.split('.').pop() || 'jpg';
+                imageFilename = `${id}.${ext}`;
+                await putImage(
+                    `${IMAGE_DIR}/${imageFilename}`,
+                    await image.arrayBuffer(),
+                    `Bilde for nyhet: ${tittel}`,
+                );
+            }
+
+            const updated = {
+                nyheter: [
+                    { id, tittel, dato, body, ...(imageFilename ? { image: imageFilename } : {}) },
+                    ...nyheter,
+                ].sort((a, b) => b.dato.localeCompare(a.dato)),
+            };
+
+            await putJson(NYHETER_PATH, updated, `Legg til nyhet: ${tittel}`);
+            return Astro.redirect('/bakrommet/nyheter');
+        } catch (error) {
+            console.error(error);
+            errorMessage = 'Noe gikk galt ved lagring. Prøv igjen.';
+        }
+    } else {
+        errorMessage = 'Fyll ut tittel, dato og innhold.';
+    }
+}
+---
+
+<BakromLayout title='Siste nytt'>
+    <h2 class='text-xl md:text-2xl font-bold'>Siste nytt</h2>
+
+    <section class='grid gap-2'>
+        {
+            nyheter.length === 0 ? (
+                <p>Ingen nyheter enda.</p>
+            ) : (
+                nyheter.map((n) => (
+                    <a
+                        href={`/bakrommet/nyheter/${n.id}`}
+                        class='p-3 border border-slate-200 bg-white rounded-xs drop-shadow-lg hover:bg-slate-50'
+                    >
+                        <p class='font-bold'>{n.tittel}</p>
+                        <p class='text-sm text-slate-500'>{n.dato}</p>
+                    </a>
+                ))
+            )
+        }
+    </section>
+
+    <section class='border-t border-slate-200 pt-6'>
+        <h3 class='font-bold mb-2'>Legg til nyhet</h3>
+        {errorMessage && <p class='text-rose-600 font-semibold'>{errorMessage}</p>}
+        <form method='POST' enctype='multipart/form-data' class='grid gap-3 max-w-xl'>
+            <label class='flex flex-col w-full'>
+                Tittel
+                <input
+                    type='text'
+                    name='tittel'
+                    required
+                    class='p-2 rounded-xs text-primary border invalid:border-rose-500 valid:border-green-600'
+                />
+            </label>
+            <label class='flex flex-col w-full'>
+                Dato
+                <input
+                    type='date'
+                    name='dato'
+                    required
+                    value={new Date().toISOString().slice(0, 10)}
+                    class='p-2 rounded-xs text-primary border invalid:border-rose-500 valid:border-green-600'
+                />
+            </label>
+            <label class='flex flex-col w-full'>
+                Bilde (valgfritt)
+                <input type='file' name='image' accept='image/*' class='p-2' />
+            </label>
+            <label class='flex flex-col w-full'>
+                Innhold (Markdown støttes: **fet**, *kursiv*, avsnitt)
+                <textarea
+                    name='body'
+                    required
+                    rows='6'
+                    class='p-2 rounded-xs text-primary border invalid:border-rose-500 valid:border-green-600'
+                ></textarea>
+            </label>
+            <input
+                type='submit'
+                value='Legg til'
+                class='py-2 mt-2 rounded-xs bg-[#efb261] text-black cursor-pointer hover:text-amber-100 hover:bg-yellow-900 md:w-1/2'
+            />
+        </form>
+    </section>
+</BakromLayout>

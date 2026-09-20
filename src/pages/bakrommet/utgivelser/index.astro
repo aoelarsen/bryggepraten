@@ -1,0 +1,182 @@
+---
+export const prerender = false;
+
+import BakromLayout from '../../../layouts/BakromLayout.astro';
+import { getJson, putJson, putImage } from '../../../lib/github';
+import { slugify, uniqueSlug } from '../../../lib/slugify';
+import type { UtgivelserData, BokKategori } from '../../../lib/contentTypes';
+
+const UTGIVELSER_PATH = 'src/constants/utgivelser.json';
+const IMAGE_DIR = 'src/images/bokomslag';
+
+let errorMessage = '';
+
+const existing = await getJson<UtgivelserData>(UTGIVELSER_PATH);
+const data = existing?.data ?? {
+    utgivelser: { bryggepraten: [], kalendere: [], andre_forfattere: [] },
+};
+
+const allSlugs = [...data.utgivelser.bryggepraten, ...data.utgivelser.andre_forfattere]
+    .map((b) => b.slug)
+    .filter((s): s is string => Boolean(s));
+
+if (Astro.request.method === 'POST') {
+    const formData = await Astro.request.formData();
+    const tittel = formData.get('tittel');
+    const kategori = formData.get('kategori') as BokKategori | null;
+    const forfattere = formData.get('forfattere');
+    const sjanger = formData.get('sjanger');
+    const pris = formData.get('pris');
+    const status = formData.get('status');
+    const body = formData.get('body');
+    const image = formData.get('image');
+
+    const validInput =
+        typeof tittel === 'string' &&
+        tittel.trim().length > 0 &&
+        (kategori === 'bryggepraten' || kategori === 'andre_forfattere') &&
+        typeof forfattere === 'string';
+
+    if (validInput) {
+        try {
+            const slug = uniqueSlug(slugify(tittel), allSlugs);
+
+            let imageFilename: string | undefined;
+            if (image instanceof File && image.size > 0) {
+                const ext = image.name.split('.').pop() || 'jpg';
+                imageFilename = `${slug}.${ext}`;
+                await putImage(
+                    `${IMAGE_DIR}/${imageFilename}`,
+                    await image.arrayBuffer(),
+                    `Bilde for utgivelse: ${tittel}`,
+                );
+            }
+
+            data.utgivelser[kategori].push({
+                tittel,
+                slug,
+                forfattere: forfattere
+                    .split(',')
+                    .map((f) => f.trim())
+                    .filter(Boolean),
+                sjanger: typeof sjanger === 'string' ? sjanger : '',
+                pris: typeof pris === 'string' ? pris : '',
+                status: typeof status === 'string' ? status : '',
+                body: typeof body === 'string' ? body : '',
+                ...(imageFilename ? { image: imageFilename } : {}),
+            });
+
+            await putJson(UTGIVELSER_PATH, data, `Legg til utgivelse: ${tittel}`);
+            return Astro.redirect('/bakrommet/utgivelser');
+        } catch (error) {
+            console.error(error);
+            errorMessage = 'Noe gikk galt ved lagring. Prøv igjen.';
+        }
+    } else {
+        errorMessage = 'Fyll ut tittel, kategori og forfattere.';
+    }
+}
+---
+
+<BakromLayout title='Utgivelser'>
+    <h2 class='text-xl md:text-2xl font-bold'>Utgivelser</h2>
+
+    <section class='grid gap-4'>
+        <div>
+            <h3 class='font-bold mb-1'>Bryggepraten</h3>
+            <div class='grid gap-2'>
+                {
+                    data.utgivelser.bryggepraten.map((b) => (
+                        <a
+                            href={`/bakrommet/utgivelser/${b.slug}`}
+                            class='p-3 border border-slate-200 bg-white rounded-xs drop-shadow-lg hover:bg-slate-50'
+                        >
+                            <p class='font-bold'>{b.tittel}</p>
+                            <p class='text-sm text-slate-500'>
+                                {b.forfattere?.join(', ')} {b.status && `· ${b.status}`}
+                            </p>
+                        </a>
+                    ))
+                }
+            </div>
+        </div>
+        <div>
+            <h3 class='font-bold mb-1'>Andre forfattere</h3>
+            <div class='grid gap-2'>
+                {
+                    data.utgivelser.andre_forfattere.map((b) => (
+                        <a
+                            href={`/bakrommet/utgivelser/${b.slug}`}
+                            class='p-3 border border-slate-200 bg-white rounded-xs drop-shadow-lg hover:bg-slate-50'
+                        >
+                            <p class='font-bold'>{b.tittel}</p>
+                            <p class='text-sm text-slate-500'>{b.forfattere?.join(', ')}</p>
+                        </a>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <section class='border-t border-slate-200 pt-6'>
+        <h3 class='font-bold mb-2'>Legg til utgivelse</h3>
+        {errorMessage && <p class='text-rose-600 font-semibold'>{errorMessage}</p>}
+        <form method='POST' enctype='multipart/form-data' class='grid gap-3 max-w-xl'>
+            <label class='flex flex-col w-full'>
+                Tittel
+                <input
+                    type='text'
+                    name='tittel'
+                    required
+                    class='p-2 rounded-xs text-primary border invalid:border-rose-500 valid:border-green-600'
+                />
+            </label>
+            <label class='flex flex-col w-full'>
+                Kategori
+                <select name='kategori' required class='p-2 rounded-xs text-primary border'>
+                    <option value='bryggepraten'>Bryggepraten</option>
+                    <option value='andre_forfattere'>Andre forfattere</option>
+                </select>
+            </label>
+            <label class='flex flex-col w-full'>
+                Forfattere (kommaseparert)
+                <input
+                    type='text'
+                    name='forfattere'
+                    required
+                    placeholder='Birger Dyve Larsen, Jørund Holst-Hansen'
+                    class='p-2 rounded-xs text-primary border invalid:border-rose-500 valid:border-green-600'
+                />
+            </label>
+            <label class='flex flex-col w-full'>
+                Sjanger
+                <input type='text' name='sjanger' class='p-2 rounded-xs text-primary border' />
+            </label>
+            <label class='flex flex-col w-full'>
+                Pris
+                <input type='text' name='pris' class='p-2 rounded-xs text-primary border' />
+            </label>
+            <label class='flex flex-col w-full'>
+                Status (f.eks. "UTSOLGT" eller "få eksemplarer igjen")
+                <input type='text' name='status' class='p-2 rounded-xs text-primary border' />
+            </label>
+            <label class='flex flex-col w-full'>
+                Bokomslag
+                <input type='file' name='image' accept='image/*' class='p-2' />
+            </label>
+            <label class='flex flex-col w-full'>
+                Beskrivelse (Markdown støttes: **fet**, *kursiv*, avsnitt)
+                <textarea
+                    name='body'
+                    rows='8'
+                    class='p-2 rounded-xs text-primary border'
+                ></textarea>
+            </label>
+            <input
+                type='submit'
+                value='Legg til'
+                class='py-2 mt-2 rounded-xs bg-[#efb261] text-black cursor-pointer hover:text-amber-100 hover:bg-yellow-900 md:w-1/2'
+            />
+        </form>
+    </section>
+</BakromLayout>

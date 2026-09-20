@@ -1,0 +1,27 @@
+---
+export const prerender = false;
+
+import BakromLayout from '../../layouts/BakromLayout.astro';
+
+const user = await Astro.session?.get('user');
+---
+
+<BakromLayout title='Bakrommet'>
+    <h2 class='text-xl md:text-2xl font-bold'>Velkommen, {user}!</h2>
+    <div class='grid sm:grid-cols-2 gap-4'>
+        <a
+            href='/bakrommet/nyheter'
+            class='p-4 border border-slate-200 bg-white rounded-xs drop-shadow-lg hover:bg-slate-50'
+        >
+            <h3 class='font-bold'>Siste nytt</h3>
+            <p>Legg til eller rediger nyhetssaker fra forlaget.</p>
+        </a>
+        <a
+            href='/bakrommet/utgivelser'
+            class='p-4 border border-slate-200 bg-white rounded-xs drop-shadow-lg hover:bg-slate-50'
+        >
+            <h3 class='font-bold'>Utgivelser</h3>
+            <p>Legg til eller rediger bokutgivelser.</p>
+        </a>
+    </div>
+</BakromLayout>
