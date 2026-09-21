@@ -2,18 +2,15 @@
 export const prerender = false;
 
 import BakromLayout from '../../../layouts/BakromLayout.astro';
-import { getJson, putJson, putImage } from '../../../lib/github';
-import type { NyheterData } from '../../../lib/contentTypes';
+import { putImage } from '../../../lib/github';
+import { getNewsById, updateNews, deleteNews } from '../../../lib/news';
 
-const NYHETER_PATH = 'src/constants/nyheter.json';
 const IMAGE_DIR = 'src/images/nyheter';
 
 const { id } = Astro.params;
 
 let errorMessage = '';
-const existing = await getJson<NyheterData>(NYHETER_PATH);
-const nyheter = existing?.data.nyheter ?? [];
-let item = nyheter.find((n) => n.id === id);
+let item = id ? await getNewsById(id) : null;
 
 if (!item) {
     return Astro.redirect('/bakrommet/nyheter');
@@ -25,8 +22,7 @@ if (Astro.request.method === 'POST') {
 
     try {
         if (action === 'slett') {
-            const updated = { nyheter: nyheter.filter((n) => n.id !== id) };
-            await putJson(NYHETER_PATH, updated, `Slett nyhet: ${item.tittel}`);
+            await deleteNews(id!);
             return Astro.redirect('/bakrommet/nyheter');
         }
 
@@ -53,17 +49,7 @@ if (Astro.request.method === 'POST') {
                 );
             }
 
-            const updated = {
-                nyheter: nyheter
-                    .map((n) =>
-                        n.id === id
-                            ? { id, tittel, dato, body, ...(imageFilename ? { image: imageFilename } : {}) }
-                            : n,
-                    )
-                    .sort((a, b) => b.dato.localeCompare(a.dato)),
-            };
-
-            await putJson(NYHETER_PATH, updated, `Rediger nyhet: ${tittel}`);
+            await updateNews(id!, { tittel, dato, body, image: imageFilename });
             return Astro.redirect('/bakrommet/nyheter');
         }
         errorMessage = 'Fyll ut tittel, dato og innhold.';

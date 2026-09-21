@@ -1,0 +1,77 @@
+---
+export const prerender = false;
+
+import { Image } from 'astro:assets';
+import { marked } from 'marked';
+import Layout from '../../layouts/Layout.astro';
+import { listNews } from '../../lib/news';
+
+const requestedPage = Number(Astro.url.searchParams.get('side') ?? '1');
+const page = Number.isFinite(requestedPage) && requestedPage > 0 ? Math.floor(requestedPage) : 1;
+
+const { items, totalPages } = await listNews(page);
+
+const nyhetsbilder = import.meta.glob<{ default: ImageMetadata }>('/src/images/nyheter/*', {
+    eager: true,
+});
+const bildeFor = (image?: string) => {
+    if (!image) return undefined;
+    const entry = Object.entries(nyhetsbilder).find(([path]) => path.endsWith(`/${image}`));
+    return entry?.[1].default;
+};
+---
+
+<Layout title='Siste nytt – Bryggepraten.no'>
+    <main class='p-4 mx-auto max-w-2xl grid gap-8 mb-8'>
+        <h2 class='text-xl md:text-3xl'>Siste nytt</h2>
+
+        {
+            items.length === 0 ? (
+                <p>Ingen nyheter enda.</p>
+            ) : (
+                <section class='grid gap-6'>
+                    {items.map((n) => {
+                        const bilde = bildeFor(n.image);
+                        const bodyHtml = marked.parse(n.body);
+                        return (
+                            <article class='border border-dotted border-[#efb261] rounded-xs p-2 m-2'>
+                                <h3 class='text-lg font-bold'>{n.tittel}</h3>
+                                <p class='text-sm text-slate-500'>{n.dato}</p>
+                                {bilde && (
+                                    <figure>
+                                        <Image src={bilde} alt={n.tittel} loading='lazy' />
+                                    </figure>
+                                )}
+                                <div class='prose max-w-none' set:html={bodyHtml} />
+                            </article>
+                        );
+                    })}
+                </section>
+            )
+        }
+
+        {
+            totalPages > 1 && (
+                <nav class='flex justify-between items-center'>
+                    {page > 1 ? (
+                        <a href={`/nyheter?side=${page - 1}`} class='underline hover:no-underline'>
+                            ← Nyere
+                        </a>
+                    ) : (
+                        <span />
+                    )}
+                    <span class='text-sm text-slate-500'>
+                        Side {page} av {totalPages}
+                    </span>
+                    {page < totalPages ? (
+                        <a href={`/nyheter?side=${page + 1}`} class='underline hover:no-underline'>
+                            Eldre →
+                        </a>
+                    ) : (
+                        <span />
+                    )}
+                </nav>
+            )
+        }
+    </main>
+</Layout>

@@ -6,10 +6,6 @@ export interface Nyhet {
 	body: string;
 }
 
-export interface NyheterData {
-	nyheter: Nyhet[];
-}
-
 export interface Bok {
 	tittel: string;
 	slug?: string;

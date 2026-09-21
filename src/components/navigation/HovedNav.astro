@@ -102,6 +102,24 @@ const currentPath = pathname.slice(1);
                             )
                         }
                         {
+                            currentPath === 'nyheter' ? (
+                                <a
+                                    href='/nyheter'
+                                    class='bg-gray-900 text-white px-3 py-2 rounded-xs text-sm font-medium active:text-white'
+                                    aria-current='page'
+                                >
+                                    Siste nytt
+                                </a>
+                            ) : (
+                                <a
+                                    href='/nyheter'
+                                    class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-xs text-sm font-medium active:text-white'
+                                >
+                                    Siste nytt
+                                </a>
+                            )
+                        }
+                        {
                             currentPath === 'kontakt-oss' ? (
                                 <a
                                     href='/kontakt-oss'
@@ -183,6 +201,24 @@ const currentPath = pathname.slice(1);
                         class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-xs text-sm font-medium active:text-white'
                     >
                         Om Bryggepraten
+                    </a>
+                )
+            }
+            {
+                currentPath === 'nyheter' ? (
+                    <a
+                        href='/nyheter'
+                        class='bg-gray-900 text-white px-3 py-2 rounded-xs text-sm font-medium active:text-white'
+                        aria-current='page'
+                    >
+                        Siste nytt
+                    </a>
+                ) : (
+                    <a
+                        href='/nyheter'
+                        class='text-blue-600 hover:text-blue-200 focus:text-blue-800 hover:bg-gray-700  px-3 py-2 rounded-xs text-sm font-medium active:text-white'
+                    >
+                        Siste nytt
                     </a>
                 )
             }

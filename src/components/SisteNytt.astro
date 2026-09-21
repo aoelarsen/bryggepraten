@@ -1,11 +1,9 @@
 ---
 import { Image } from 'astro:assets';
 import { marked } from 'marked';
-import nyheterData from '../constants/nyheter.json';
-import type { Nyhet } from '../lib/contentTypes';
+import { getLatestNews } from '../lib/news';
 
-const nyheter: Nyhet[] = [...nyheterData.nyheter].sort((a, b) => b.dato.localeCompare(a.dato));
-const siste = nyheter[0];
+const siste = await getLatestNews();
 
 const nyhetsbilder = import.meta.glob<{ default: ImageMetadata }>('/src/images/nyheter/*', {
     eager: true,
@@ -30,6 +28,9 @@ const bodyHtml = siste?.body ? marked.parse(siste.body) : '';
                     </figure>
                 )}
                 <div class='prose max-w-none' set:html={bodyHtml} />
+                <a href='/nyheter' class='inline-block mt-2 text-sm underline hover:no-underline'>
+                    Eldre nyheter →
+                </a>
             </article>
         </section>
     )
